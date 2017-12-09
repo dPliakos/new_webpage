@@ -9,13 +9,13 @@ body {
   background-position: center center;
   background-attachment: fixed;
   background-color: #393939;
-  color: #f4f4f4; 
+  color: #f4f4f4;
   font-family: 'Open Sans', sans-serif;
 }
 
 @media screen and (max-width: 480px) {
     .home_main_panel {
-        margin-top: 130px;
+    /*    margin-top: 130px; */
     }
 
     .bottom {
@@ -53,23 +53,8 @@ a {
   margin-top: 30px;
 }
 
-.home_main_panel {
-  height: 550px;
-  position: relative;
-  /* overflow-x: visible; */
-}
-
-.page-header {
-  background-color: white;
-}
-
-.smallEvent {
-  margin-top: 7px;
-}
-
-.smallEvent:hover {
-  background-color: #f4f4f4;
-  cursor: pointer;
+.navigationBar {
+  margin: 0;
 }
 
 .bold {
@@ -77,14 +62,12 @@ a {
 }
 
 .transparent {
-  opacity: 1;
-  /*background-color: transparent; */
-
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.ridgeBordered {
-  border: ridge;
-  padding: 10px;
+.fullScreen {
+  width: 100vw;
+  height: 100vh;
 }
 
 .testBordered {

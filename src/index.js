@@ -15,7 +15,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 class NavigationBar extends React.Component {
   render() {
     return (
-      <Navbar inverse collapseOnSelect>
+      <Navbar className="navigationBar" inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">IEEE ATEITH SB</Link>
@@ -62,21 +62,21 @@ class Page extends React.Component {
 
   render() {
     return (
-      <Router>
+      <Router className="fullScreen">
           <div>
             <NavigationBar onClick={(index)=>{this.onPageChange(index)}}/>
-              <Grid bsStyle="container" fluid={true}>
+              <Grid>
                 <Row>
-                <Col md={12}>
-                <Route exact path="/" component={
-                  () => <Home changeBackground={this.changeBackground} />
-                }/>
+                <Col>
                 <Switch>
-                <Route path="/about" component={About}/>
-                <Route path="/events" component={Events}/>
-                <Route path="/blog" component={Blog}/>
-                <Route path="/contact" component={Contact}/>
-                <Route component={ERROR} />
+                  <Route exact path="/" component={
+                    () => <Home changeBackground={this.changeBackground} />
+                  }/>
+                  <Route path="/about" component={About}/>
+                  <Route path="/events" component={Events}/>
+                  <Route path="/blog" component={Blog}/>
+                  <Route path="/contact" component={Contact}/>
+                  <Route component={ERROR} />
                 </Switch>
               </Col>
             </Row>

@@ -1,0 +1,95 @@
+
+.smallEventsPanel {
+ height: 100vh;
+ /*display: flex;
+ flex-direction: column;
+ justify-content: flex-end; */
+ bottom: 50px;
+}
+
+.smallEvent {
+  color: black;
+}
+
+.smallEvent:hover {
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.page-header {
+  background-color: white;
+}
+
+.headerWhite  {
+  margin-top: 150px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btnLearnMore {
+  width: 200px;
+  border-radius: 25px;
+
+}
+
+.panel-heading {
+  height: 30px;
+}
+/*
+.smallEventType_0 .panel-heading {
+  background-color: green ;
+}
+
+.smallEventType_1 .panel-heading {
+  background-color: purple ;
+}
+
+.smallEventType_2 .panel-heading {
+  background-color: yellow ;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+/*
+@media screen and (max-width: 480px) {
+
+
+    .bottom {
+      position: static;
+      bottom: -130px;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .bottom {
+      position: absolute;
+      bottom: 0px;
+    }
+}
+
+.home_main_panel {
+  height: 550px;
+  position: relative;
+}
+
+
+
+.smallEvent {
+  margin-top: 7px;
+}
+
+.smallEvent:hover {
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+*/

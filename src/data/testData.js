@@ -14,17 +14,18 @@ var events = [
    name: "name2",
    description: "This is a nother description"
  },
- // {
- //   name: "name3",
- //   description: "Yet another description"
- // }
-]
+ {
+   name: "name3",
+   description: "Yet another description"
+ }
 
+]
 var messages = {
   title: "IEEE Student Branch of ATEITH",
   moto: "Advancing technology for humanity",
   newEvents: "Upcoming Events",
   noNewEvents: "No upcoming events"
+
 }
 
 var contactInfo = [

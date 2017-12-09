@@ -1,21 +1,22 @@
 import React from 'react';
-import {Grid, Row, Col, Jumbotron, Panel, Button} from 'react-bootstrap';
+import {Row, Col, Panel, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import './style/main.css';
+import './style/home.css';
 import  imgData from './data/testData.js';
 import  events from './data/testData.js';
 import messages from './data/testData.js';
 
+
 class SmallEvent  extends React.Component {
    render() {
     return(
-      <Panel className="smallEvent">
-        <span className="bold"> {this.props.name} </span>
-        <br/>
+      <Col md={6} xs={12}>
+      <Panel className={"smallEvent " + this.props.type} header={this.props.name} >
         <span> {this.props.description} </span>
         <br />
       </Panel>
+      </Col>
     );
   }
 }
@@ -30,17 +31,22 @@ class SmallEventsPanel extends React.Component {
   }
 
   render() {
-    const newEventsExist = events.events.length;
+    const newEventsExist = this.state.events.length > 0;
     const success = messages.messages.newEvents;
     const fail = messages.messages.noNewEvents;
     return (
-      <Panel header={newEventsExist ? success : fail} bsStyle="primary" className="transparent">
+      <div>
+      <Row>
+        <h3> Upcoming events: </h3>
+      </Row>
+      <Row>
           { this.state.events.map(
             (event, i ) => {
-              return <SmallEvent name={event.name} description={event.description} key={i} />
+              return <SmallEvent name={event.name} description={event.description} key={i} type={`smallEventType_${i%3}`} />
             }
           )}
-      </Panel>
+      </Row>
+      </div>
     );
   }
 }
@@ -48,19 +54,17 @@ class SmallEventsPanel extends React.Component {
 class Header extends React.Component {
   render() {
     return (
-      <Jumbotron>
-        <div className="ridgeBordered" >
-          <h2> IEEE Student Branch of ATEITH </h2>
+        <div className="headerWhite">
+          <span> IEEE Student Branch of ATEITH </span>
           <br/>
           <p>
             Advancing technology for humanity!
           </p>
           <br/>
           <Link to="/about">
-            <Button bsStyle="primary"> Learn More </Button>
+            <Button bsStyle="success" className="btnLearnMore"> Learn More </Button>
           </Link>
         </div>
-      </Jumbotron>
     );
   }
 }
@@ -69,21 +73,14 @@ class MainPanel extends React.Component {
 
   render() {
     return(
-      <Grid bsStyle="Container" fluid={true}>
-        <Row className="home_main_panel">
-            <Col md={3} >
-              <Header />
-            </Col>
-            <Col md={10} sm={6} xs={12} mdOffset={2} xsOffset={0} className="bottom">
-                <Row className="testMe">
-                  <Col md={8} />
-                  <Col md={4} xs={12} >
-                    <SmallEventsPanel className="SmallEventsPanel"/>
-                  </Col>
-                </Row>
-            </Col>
-        </Row>
-      </Grid>
+      <div className="transparent" >
+        <Col md={12} sm={12} xs={10} mdOffset={0} xsOffset={1}>
+          <Header  />
+          <Row className="topSpacer">
+            <SmallEventsPanel />
+          </Row>
+        </Col>
+      </div>
     );
   }
 }
