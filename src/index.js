@@ -8,7 +8,8 @@ import About from './about.js';
 import Events from './events.js';
 import Blog from './blog.js';
 import Contact from './contact.js';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import ERROR from './not_found.js';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 
 class NavigationBar extends React.Component {
@@ -70,10 +71,13 @@ class Page extends React.Component {
                 <Route exact path="/" component={
                   () => <Home changeBackground={this.changeBackground} />
                 }/>
+                <Switch>
                 <Route path="/about" component={About}/>
                 <Route path="/events" component={Events}/>
                 <Route path="/blog" component={Blog}/>
                 <Route path="/contact" component={Contact}/>
+                <Route component={ERROR} />
+                </Switch>
               </Col>
             </Row>
           </Grid>
