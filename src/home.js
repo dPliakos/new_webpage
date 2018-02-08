@@ -1,21 +1,28 @@
 import React from 'react';
 import {Row, Col, Panel, Button} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {LinkContainer} from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './style/home.css';
 import  imgData from './data/testData.js';
-import  events from './data/testData.js';
+import  events from './data/myevents.js';
 import messages from './data/testData.js';
 
 
 class SmallEvent  extends React.Component {
    render() {
+     const event = this.props.event;
+     const desc = `${event.date} @${event.location}`;
     return(
       <Col md={6} xs={12}>
-      <Panel className={"smallEvent " + this.props.type} header={this.props.name} >
-        <span> {this.props.description} </span>
+      <LinkContainer to={`/events/${event.title.toLowerCase()}`}>
+      <Panel className={"smallEvent " + this.props.type} header={event.title} >
+          <span> {desc} </span>
+          <br/>
+          <span> {event.subtitle} </span>
         <br />
       </Panel>
+      </LinkContainer>
       </Col>
     );
   }
@@ -42,7 +49,7 @@ class SmallEventsPanel extends React.Component {
       <Row>
           { this.state.events.map(
             (event, i ) => {
-              return <SmallEvent name={event.name} description={event.description} key={i} type={`smallEventType_${i%3}`} />
+              return <SmallEvent event={event} key={i} type={`smallEventType_${i%3}`} />
             }
           )}
       </Row>

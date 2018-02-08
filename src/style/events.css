@@ -2,19 +2,40 @@
 	color: #f4f4f4;
 }
 
+a{
+	color: inherit;
+}
+
+a:hover {
+	color:inherit;
+}
+
 .eventPanel{
 	border: 1px solid black;
-	background-color: #666464;
+	transition: background-color 0.5s;
+}
 
+.eventPanelInactive {
+	background-color: #666464;
+}
+
+.eventPanelActive {
+	background-color: #f4f4f4;
+	color:   #666464;
 }
 
 .eventPanel:hover{
- 	cursor: pointer;
- 	background-color: #393939;
+
+ 	/* background-color: #393939; */
  }
 
 .eventHeader  {
-	vertical-align: middle;
+	vertical-align: bottom;
+
+}
+
+.eventHeader:hover  {
+	cursor: pointer;
 }
 
 .eventDate {
@@ -35,4 +56,17 @@
 
 .eventNameInfo span{
 	font-size: 30px;
+}
+
+.label-with-icon label{
+	margin-left: 10px;
+}
+
+.eventImage {
+	width: 100%;
+}
+
+.eventDescription {
+	text-align: justify;
+	margin-top: 40px;
 }
