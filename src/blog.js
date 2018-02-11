@@ -1,12 +1,17 @@
 import React from 'react';
+import BlogPost from './blogpost.js';
+import ERROR from './not_found.js';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import Sidebar from 'react-sidebar';
 
 export default class Blog extends React.Component {
   render() {
     return(
       <center>
-        <br/> <br/> <br/>
-        <p> This is a Blog page! </p>
+        <Switch>
+          <Route path="/blog/:title" component={BlogPost} />
+        </Switch>
       </center>
     );
   }
