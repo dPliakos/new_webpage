@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link} from 'react-router-dom';
 import './style/about.css';
+import './style/main.css';
 
 
 class Header extends React.Component {
@@ -78,7 +79,7 @@ class About2 extends React.Component {
 	            για ακαδημαϊκή, τεχνολογική και επαγγελματική εξέλιξη.
             </p>
           </div>
-           <a onClick={() => {window.scrollTo(0,2200)}} className="btn btn-circle js-scroll-trigger">
+           <a onClick={() => {window.scrollTo(0,1950)}} className="btn btn-circle js-scroll-trigger">
               <i className="fa fa-angle-double-down animated"></i>
           </a>
         </div>
@@ -132,7 +133,7 @@ class About4 extends React.Component {
                 σε βοηθάει τελικά στην καριέρα σου.
             </p>
           </div>
-           <a onClick={() => {window.scrollTo(0,3850)}} className="btn btn-circle js-scroll-trigger">
+           <a onClick={() => {window.scrollTo(0,3400)}} className="btn btn-circle js-scroll-trigger">
               <i className="fa fa-angle-double-down animated"></i>
           </a>
         </div>

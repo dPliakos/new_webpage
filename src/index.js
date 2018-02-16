@@ -72,7 +72,9 @@ class Page extends React.Component {
                   <Route exact path="/" component={
                     () => <Home changeBackground={this.changeBackground} />
                   }/>
-                  <Route path="/about" component={About}/>
+                  <Route path="/about" component={
+                    () => <About changeBackground={this.changeBackground} />
+                  }/>
                   <Route path="/events" component={Events}/>
                   <Route path="/blog" component={Blog}/>
                   <Route path="/contact" component={Contact}/>
