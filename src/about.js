@@ -7,11 +7,10 @@ import './style/main.css';
 
 class Header extends React.Component {
 
-  
   render() {
     return (
-   
-      <header className="masthead">    
+
+      <header className="masthead">
 	             <div className="intro-body">
 	              <div className="container">
           		   <div className="row">
@@ -20,11 +19,11 @@ class Header extends React.Component {
 	                   <p className="intro-text">Press the button to scroll down and learn more</p>
                        <a href="#about1" className="btn  btn-circle js-scroll-trigger">
                         <i className="fa fa-angle-double-down animated"></i>
-                       </a> 
+                       </a>
 	             </div>
-	            </div> 
-	           </div> 
-	          </div>              
+	            </div>
+	           </div>
+	          </div>
     </header>
     );
   }
@@ -32,24 +31,24 @@ class Header extends React.Component {
 
 class About1 extends React.Component {
   render() {
-    return (            
+    return (
     <section id="about1" className="content-section text-center">
       <div className="container">
         <div className="row">
          <h2>ΤΙ ΕΙΝΑΙ Η IEEE</h2>
           <div className="stl">
-            
+
             <p>
 	             Η ΙΕΕΕ (Institute of Electrical and Electronic Engineers)
-	             είναι μια παγκόσμια τεχνολογική, επαγγελματική, μη πολιτική οργάνωση 
+	             είναι μια παγκόσμια τεχνολογική, επαγγελματική, μη πολιτική οργάνωση
 	             με σκοπό την προώθηση της θεωρίας και των εφαρμογών της επιστήμης του
 	             Ηλεκτρολόγου Μηχανικού και Μηχανικού Υπολογιστών για την εξέλιξη του επαγγέλματος
 	             με γνώμονα την κοινωνική προσφορά.
             </p>
 
             <p>
-	            Στην ΙΕΕΕ είναι σήμερα εγγεγραμμένα περισσότερα από 400.000 μέλη εκ των 
-	            οποίων περισσότεροι από 90.000 φοιτητές, σε περισσότερες από 160 χώρες, γεγονός 
+	            Στην ΙΕΕΕ είναι σήμερα εγγεγραμμένα περισσότερα από 400.000 μέλη εκ των
+	            οποίων περισσότεροι από 90.000 φοιτητές, σε περισσότερες από 160 χώρες, γεγονός
 	            που την καθιστά τη μεγαλύτερη τεχνολογική επαγγελματική κοινότητα στον κόσμο.
             </p>
           </div>
@@ -65,21 +64,21 @@ class About1 extends React.Component {
 
 class About2 extends React.Component {
   render() {
-    return (            
+    return (
     <section id="about2" className="content-section text-center">
       <div className="container">
         <div className="row">
          <h2>Οι φοιτητΕς στην ΙΕΕΕ</h2>
           <div className="stl">
-            
-            <p>Οι φοιτητές παίζουν καθοριστικό ρόλο για την IEEE. Σήμερα υπάρχουν περισσότερες 
-	            από 2000 φοιτητικές ομάδες της ΙΕΕΕ στον κόσμο. Σκοπός τους είναι να παρέχουν στους 
-	            προπτυχιακούς και μεταπτυχιακούς φοιτητές, που ενδιαφέρονται για την επιστήμη του 
-	            Ηλεκτρολόγου Μηχανικού, Μηχανικού Υπολογιστών ή συγγενείς επιστήμες, ευκαιρίες 
+
+            <p>Οι φοιτητές παίζουν καθοριστικό ρόλο για την IEEE. Σήμερα υπάρχουν περισσότερες
+	            από 2000 φοιτητικές ομάδες της ΙΕΕΕ στον κόσμο. Σκοπός τους είναι να παρέχουν στους
+	            προπτυχιακούς και μεταπτυχιακούς φοιτητές, που ενδιαφέρονται για την επιστήμη του
+	            Ηλεκτρολόγου Μηχανικού, Μηχανικού Υπολογιστών ή συγγενείς επιστήμες, ευκαιρίες
 	            για ακαδημαϊκή, τεχνολογική και επαγγελματική εξέλιξη.
             </p>
           </div>
-           <a onClick={() => {window.scrollTo(0,1950)}} className="btn btn-circle js-scroll-trigger">
+           <a href="#about3" className="btn btn-circle js-scroll-trigger">
               <i className="fa fa-angle-double-down animated"></i>
           </a>
         </div>
@@ -91,7 +90,7 @@ class About2 extends React.Component {
 
 class About3 extends React.Component {
   render() {
-    return (            
+    return (
     <section id="about3" className="content-section text-center">
       <div className="container">
         <div className="row">
@@ -117,23 +116,23 @@ class About3 extends React.Component {
 
 class About4 extends React.Component {
   render() {
-    return (            
+    return (
     <section id="about4" className="content-section text-center">
       <div className="container">
         <div className="row">
          <h2>ΓιατI να γIνεις μEλος στην IEEE</h2>
           <div className="stl">
             <p>
-               Η εγγραφή ενός φοιτητή ως μέλος της ΙΕΕΕ του παρέχει όλα τα προνόμια 
-               ενός κανονικού μέλους με το συγκριτικό πλεονέκτημα της πολύ μικρότερης 
-               συνδρομής. Η ΙΕΕΕ μέσω των πρωτοποριακών θεμάτων που πραγματεύεται και 
-               τη συμμετοχή σε διάφορες επαγγελματικές δραστηριότητες, συνέδρια κ.ά., 
+               Η εγγραφή ενός φοιτητή ως μέλος της ΙΕΕΕ του παρέχει όλα τα προνόμια
+               ενός κανονικού μέλους με το συγκριτικό πλεονέκτημα της πολύ μικρότερης
+               συνδρομής. Η ΙΕΕΕ μέσω των πρωτοποριακών θεμάτων που πραγματεύεται και
+               τη συμμετοχή σε διάφορες επαγγελματικές δραστηριότητες, συνέδρια κ.ά.,
                σου δίνει τη δυνατότητα να είσαι ενήμερος της προόδου της τεχνολογίας και
-                του κλάδου σου, των τελευταίων τάσεων της βιομηχανίας και – το πιο σημαντικό – 
+                του κλάδου σου, των τελευταίων τάσεων της βιομηχανίας και – το πιο σημαντικό –
                 σε βοηθάει τελικά στην καριέρα σου.
             </p>
           </div>
-           <a onClick={() => {window.scrollTo(0,3400)}} className="btn btn-circle js-scroll-trigger">
+           <a href="#about5" className="btn btn-circle js-scroll-trigger">
               <i className="fa fa-angle-double-down animated"></i>
           </a>
         </div>
@@ -146,7 +145,7 @@ class About4 extends React.Component {
 
 class About5 extends React.Component {
   render() {
-    return (            
+    return (
     <section id="about5" className="content-section text-center">
       <div className="container">
         <div className="row">
@@ -179,7 +178,7 @@ class About5 extends React.Component {
 
 class About6 extends React.Component {
   render() {
-    return (            
+    return (
     <section id="about6" className="content-section text-center">
        <div id="builder-column-529c5ea63089d" className="span12 column_first column_last">
           <h2 class="rw-sentence">
@@ -190,21 +189,23 @@ class About6 extends React.Component {
 				<span>ΔΙΑΓΩΝΙΣΤΕΙΣ</span>
 				<span>ΣΥΜΜΕΤΕΧΕΙΣ</span>
 		    </div>
-		  </h2>  
+		  </h2>
 		<div>
-			<a href="http://www.ieee.org/membership_services/membership/join/index.html" target="_blank" class="btn btn-lg btn-primary push-top">Εγγραφή</a>	
-    	</div>  
+			<a  href="http://www.ieee.org/membership_services/membership/join/index.html"
+          target="_blank" rel="noopener noreferrer"
+          class="btn btn-lg btn-primary push-top">Εγγραφή</a>
+    	</div>
        </div>
        <div>
 		<p class="lead">
-		  Θα θέλαμε πολύ πριν γραφτείς, να μας γνωρίσεις, να μας ρωτήσεις ότι απορία έχεις σχετικά με την ΙΕΕΕ ή με το ΑΤΕΙΤΗ Student Branch. Θα βρείς πληροφορίες 
+		  Θα θέλαμε πολύ πριν γραφτείς, να μας γνωρίσεις, να μας ρωτήσεις ότι απορία έχεις σχετικά με την ΙΕΕΕ ή με το ΑΤΕΙΤΗ Student Branch. Θα βρείς πληροφορίες
 		  στο <Link to="/blog">
 		  <a target="_blank"><span class="alternative-font">STUDENT BRANCH</span></a>
-		  </Link> για να επικοινωνήσεις με κάποιον από εμάς ή μπορείς να στείλεις μήνυμα συμπληρώνοντας την φόρμα που θα βρείς 
+		  </Link> για να επικοινωνήσεις με κάποιον από εμάς ή μπορείς να στείλεις μήνυμα συμπληρώνοντας την φόρμα που θα βρείς
 		  στο <Link to="/contact">
 		  <a target="_blank"><span class="alternative-font">CONTACT</span></a>
 		  </Link>. Επίσης μπορείς να παρευρεθείς σε οποιαδήποτε εκδήλωση ή συνάντησή μας παρακολουθώντας
-		  τα <Link to="/events"> 
+		  τα <Link to="/events">
 		  <a  target="_blank"><span class="alternative-font">EVENTS</span></a>
 		  </Link>  μας.		</p>
 
@@ -226,9 +227,8 @@ export default class printAbout extends React.Component {
 	  	<About4 />
 	  	<About5 />
 	  	<About6 />
-	   </div> 
-	  
-	  );
-  } 
+	   </div>
 
+	  );
+  }
 }
