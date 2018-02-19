@@ -3,9 +3,10 @@ import {Row, Col, Panel, Button} from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import './style/home.css';
-import  imgData from './data/testData.js';
-import  events from './data/myevents.js';
+import './../style/home.css';
+import  imgData from './../data/testData.js';
+import  events from './../data/myevents.js';
+import messages from './../data/testData.js';
 
 
 class SmallEvent  extends React.Component {

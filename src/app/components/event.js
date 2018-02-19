@@ -1,8 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './style/events.css';
-import './style/main.css';
-import events from "./data/myevents.js";
+import './../style/events.css';
+import './../style/main.css';
+import events from "../data/myevents.js";
 import {Row, Col} from 'react-bootstrap';
 /*
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';

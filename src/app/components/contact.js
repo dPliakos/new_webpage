@@ -4,10 +4,10 @@ import {Row, Col, Button} from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
-import './style/contact.css';
+import './../style/contact.css';
 
-import contactInfo from './data/testData.js';
-import socialMedia from './data/testData.js';
+import contactInfo from './../data/testData.js';
+import socialMedia from './../data/testData.js';
 
 
 class ContactInfo extends React.Component {

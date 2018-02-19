@@ -1,8 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link} from 'react-router-dom';
-import './style/about.css';
-import './style/main.css';
+import './../style/about.css';
+import './../style/main.css';
 
 
 class Header extends React.Component {
