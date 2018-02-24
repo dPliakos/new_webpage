@@ -28,10 +28,10 @@ class SocialPanel extends React.Component {
     return(
       <div className="socialHolder">
         {this.props.social.map((socialTag, i) => {
-          return (<a href={socialTag.link} target="_blank">
+          return (<a href={socialTag.link} target="_blank" key={i} >
                     <FontAwesome
                     name={socialTag.fontawesome}
-                    key={i} size="2x"
+                    size="2x"
                     className="somePadding socialTag"/>
                   </a>
                 )
@@ -43,7 +43,6 @@ class SocialPanel extends React.Component {
 
 class ContactPanel extends React.Component {
   render() {
-    console.log(this.props.socialMedia);
     return(
       <div>
         <Row>
@@ -86,7 +85,7 @@ class Form extends React.Component {
         <FormUnit name="Subject" type="text" id="userSubject" />
         {/*<label> Message </label> <br/>*/}
         <textarea id="userMessage" placeholder="Message" className="topSpacer"></textarea>
-        <Button type="Submit"> Send Message </Button>
+        <Button type="submit"> Send Message </Button>
       </div>
     );
   }
