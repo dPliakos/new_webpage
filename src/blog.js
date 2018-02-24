@@ -3,7 +3,6 @@ import BlogPost from './blogpost.js';
 import ERROR from './not_found.js';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import Sidebar from 'react-sidebar';
 
 export default class Blog extends React.Component {
   render() {
