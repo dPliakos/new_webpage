@@ -1,62 +1,85 @@
 import React from 'react';
 import BlogPost from './blogpost.js';
+import {Row, Col} from 'react-bootstrap';
 import {Switch, Route } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import blogpost from './blogpost.js';
+import blogposts from './data/blog_data.js'
 import 'bootstrap/dist/css/bootstrap.css';
 
-export default class Blog extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchString: ''
-        };
-        this.receiveSearchString = this.receiveSearchString.bind(this);
 
-    }
+class DateTag extends React.Component {
+  render() {
+    return (<div> 12 <br/> Dec </div>);
+  }
+}
 
-    receiveSearchString(newSearch) {
-        this.setState({searchString: newSearch});
-        this.makeTitleSearchRequest();
-    }
-
-    makeTitleSearchRequest() {
-        for (var i = 0; i < 5; i++) {
-            //to make component of title... so we append such components with
-            //received titles
-            var node = document.createElement("button");
-            node.className = "resultTitle";
-            node.innerHTML = "THIS IS A TITLE AND ITS A TITLE" + i;
-            node.addEventListener("click", this.makePostSearchRequest);
-            document.getElementById("box3").appendChild(node);
-        }
-
-    }
-    makePostSearchRequest(){
-     //make new request of the clicked title
-
-    //receive Post and render
-    console.log("REnderpost");
-      ReactDOM.render(<Post /> ,document.getElementById("box3") );
-    }
+class ReadMore extends React.Component {
+  render() {
+    return <div> ReadMore </div>
+  }
+}
 
 
-    renderPost(){
+class RowPreview extends React.Component {
 
+  limit(text, max) {
+    return <p> {text.substring(0, max)} </p>
   }
 
-    render() {
+  render() {
+    return(
+      <div>
+      <Row>
+        <Col md={1}>
+          <DateTag />
+        </Col>
+        <Col md={10}>
+          <h3> {this.props.title} </h3>
+          <p> {this.limit(this.props.content, 250)} </p>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={4} mdOffset={8}>
+          <Link to={`/blog/${this.props.title.toLowerCase()}`}>
+            Continue Reading
+          </Link>
 
-        return (<div className="myContainer">
+        </Col>
+      </Row>
+      </div>
+    );
+  }
+}
 
-            <div className="box box1"><SearchBar sendSearchString={this.receiveSearchString}/> {this.state.searchString}
-            </div>
-            <div className="box box2 ">
-                <h4>Search By tag</h4><br/>
-                <LeftTagsPanel/>
-            </div>
-            <div className="box box3" id="box3">
-                <h3>Results</h3>
-            </div>
+class BlogIndex extends React.Component {
+  render() {
+    const posts = blogposts.blogposts;
+    return (
+      <div>
+        <Row>
+          <Col mdOffset={2}>
+            <h2> Blog </h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={8} mdOffset={2} >
+            {posts.map((post)=>{ return <RowPreview title={post.title} content={post.content}/>  })}
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+}
 
-        </div>);
-    }
+
+export default class Blog extends React.Component {
+  render() {
+    return (
+      <Switch>
+        <Route exact path={this.props.match.path + "/:title"} component={BlogPost} />
+        <Route exact path="/blog" component={BlogIndex} />
+      </Switch>
+    );
+  }
 }
