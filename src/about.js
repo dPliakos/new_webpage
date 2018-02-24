@@ -181,10 +181,10 @@ class About6 extends React.Component {
     return (
     <section id="about6" className="content-section text-center">
        <div id="builder-column-529c5ea63089d" className="span12 column_first column_last">
-          <h2 class="rw-sentence">
+          <h2 className="rw-sentence">
             <span>Ειναι μια καλη ευκαιρια να </span>
             <br></br>
-            <div class="rw-words rw-words-2">
+            <div className="rw-words rw-words-2">
 				<span>ΕΝΗΜΕΡΩΘΕΙΣ</span>
 				<span>ΔΙΑΓΩΝΙΣΤΕΙΣ</span>
 				<span>ΣΥΜΜΕΤΕΧΕΙΣ</span>
@@ -193,20 +193,20 @@ class About6 extends React.Component {
 		<div>
 			<a  href="http://www.ieee.org/membership_services/membership/join/index.html"
           target="_blank" rel="noopener noreferrer"
-          class="btn btn-lg btn-primary push-top">Εγγραφή</a>
+          className="btn btn-lg btn-primary push-top">Εγγραφή</a>
     	</div>
        </div>
        <div>
-		<p class="lead">
+		<p className="lead">
 		  Θα θέλαμε πολύ πριν γραφτείς, να μας γνωρίσεις, να μας ρωτήσεις ότι απορία έχεις σχετικά με την ΙΕΕΕ ή με το ΑΤΕΙΤΗ Student Branch. Θα βρείς πληροφορίες
 		  στο <Link to="/blog">
-		  <a target="_blank"><span class="alternative-font">STUDENT BRANCH</span></a>
+		  <span target="_blank"><span className="alternative-font">STUDENT BRANCH</span></span>
 		  </Link> για να επικοινωνήσεις με κάποιον από εμάς ή μπορείς να στείλεις μήνυμα συμπληρώνοντας την φόρμα που θα βρείς
 		  στο <Link to="/contact">
-		  <a target="_blank"><span class="alternative-font">CONTACT</span></a>
+		  <span className="alternative-font">CONTACT</span>
 		  </Link>. Επίσης μπορείς να παρευρεθείς σε οποιαδήποτε εκδήλωση ή συνάντησή μας παρακολουθώντας
 		  τα <Link to="/events">
-		  <a  target="_blank"><span class="alternative-font">EVENTS</span></a>
+		  <span className="alternative-font">EVENTS</span>
 		  </Link>  μας.		</p>
 
 	   </div>

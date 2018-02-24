@@ -22,15 +22,7 @@ export default class Event extends React.Component {
 
   getInitialState() {
     const newMatch = this.findEvent(this.props.match.params.title);
-    //this.setState({match: newMatch});
-    console.log(this.state);
-    console.log(this.props.match.params.title);
     return {match: newMatch};
-  }
-
-  componentDidMount() {
-    console.log(this.state);
-    console.log(this.props.match.params.title);
   }
 
   findEvent(title) {
@@ -61,7 +53,7 @@ export default class Event extends React.Component {
             <Col md={8} xs={6} mdOffset={2} xsOffset={3}>
               <img
                 src="https://blog.zingchart.com/content/images/2016/06/react-1.png"
-                alt="image"
+                alt="not in use"
                 className="eventImage"
               />
             </Col>

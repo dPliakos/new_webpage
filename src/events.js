@@ -4,9 +4,8 @@ import './style/events.css';
 import './style/main.css';
 import events from "./data/myevents.js";
 import Event from "./event.js";
-import {Row, Col, Panel, Collapse, Pagination} from 'react-bootstrap';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import {LinkContainer} from 'react-router-bootstrap';
+import {Row, Col, Panel, Collapse} from 'react-bootstrap';
+import {Switch, Route, Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -54,8 +53,7 @@ class EventHeader extends React.Component {
 
 class EventBody extends React.Component {
 
-  limit(text) {
-    const max = 500;
+  limit(text, max=500) {
     const link = text.length > 500 ? <Link to={`/events/${this.props.title.toLowerCase()}`}> <u> Continue Reading </u> </Link> : <span> </span> ;
     return <p> {text.substring(0, 500)} {link} </p>
   }
