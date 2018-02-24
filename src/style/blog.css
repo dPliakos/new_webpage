@@ -1,0 +1,139 @@
+
+/* <<<GRID LAYOUT */
+.myContainer {
+    display: grid;
+    /*first column for the tag panel , second column for blog posts */
+    grid-template-columns: 1.5fr 5fr;
+    grid-template-rows: 0.5fr 4fr 2fr;
+    grid-row-gap: 10px;
+    grid-column-gap: 15px;
+}
+
+/*searchbar*/
+.box1{
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start:1;
+    grid-column-end:2;
+    overflow: hidden;
+    min-width: 0;
+}
+/*Tags box*/
+.box2{
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start:1;
+    grid-column-end:2;
+    overflow: visible;
+    min-width: 0;
+}
+/*Posts box*/
+.box3{
+    grid-row-start: 2;
+    grid-row-end: auto;
+    grid-column-start:2;
+    grid-column-end:auto;
+
+}
+/* <<TAGS BOX LAYOUT */
+
+.tagsBox{
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px 20px 150px;
+    overflow: visible;
+    min-width: 0;
+}
+.availableTagsBox{
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+    overflow: visible;
+    min-width: 0;
+}
+.tagsSeparator{
+    display: block;
+         padding: 0;
+         margin: 8px auto;
+         height: 0;
+         width: 100%;
+         max-height: 0;
+         font-size: 1px;
+         line-height: 0;
+         clear: both;
+         border: none;
+         border-top: 1px solid #aaaaaa;
+         border-bottom: 1px solid #ffffff;
+         grid-row-start: 2;
+         grid-row-end: 3;
+         overflow: visible;
+         min-width: 0;
+}
+.selectedTagsBox{
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+    overflow: visible;
+    min-width: 0;
+}
+/* TAGS BOX LAYOUT>> */
+/* GRID LAYOUT>>> */
+
+
+.availableTagButton, .selectedTagButton{
+    border-radius: 8px;
+     background-color: lightgrey;
+      border: 0.5px solid white;
+      font-size: 14px;
+      opacity: 0.7;
+      margin: 1px;
+}
+.selectedTagButton{
+    background-color: lightblue;
+    opacity: 1;
+    color: black;
+}
+.availableTagButton:hover, .selectedTagButton:hover{
+    opacity: 1;
+}
+
+
+/* <<LOADER*/
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/*LOADER>> */
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display+SC');
+.resultTitle{
+    padding: 10px;
+    background-color: white;
+    font-size: 32px;
+    font-family: 'Playfair Display SC', serif;
+    border:none;
+}
+#searchBar{
+    width: 130px;
+ -webkit-transition: width 0.4s ease-in-out;
+ transition: width 0.4s ease-in-out;
+}
+
+#searchBar:focus{
+     width: 60%;
+}
