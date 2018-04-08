@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {Link } from 'react-router-dom';
-import blogposts from './data/blog_data.js';
+import blogposts from './../data/blog_data.js';
 import FontAwesome from 'react-fontawesome';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.css';

@@ -12,12 +12,17 @@ import ERROR from './not_found.js';
 import Footer from './app/components/footer.js';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
+import {Provider} from "react-redux";
+import store from "./store.js";
+import {EVENT_LOAD_RECENT} from './app/actions/eventActions.js';
+
 
 
 class NavigationBar extends React.Component {
+
   render() {
     return (
-      <Navbar className="navigationBar" inverse collapseOnSelect>
+      <Navbar className ="navigationBar" inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">IEEE ATEITH SB</Link>
@@ -50,6 +55,35 @@ class NavigationBar extends React.Component {
 
 class Page extends React.Component {
 
+  constructor() {
+    super();
+    this.state =  {
+      error: false
+    }
+  }
+
+
+  componentWillMount() {
+    let newEvents;
+
+    fetch('http://localhost:3001/events').then((response)=>{
+      return response.json();
+    }, (err)=>{
+      this.setState({error: true});
+    }).then((response)=>{
+      newEvents = response;
+    }, (err)=>{
+      console.error(err);
+    }).then((response=>{
+      store.dispatch({
+        type: EVENT_LOAD_RECENT,
+        payload: newEvents
+      })
+    })).then((response)=>{
+      console.log(store.getState());
+    })
+  }
+
   changeBackground(type, source) {
     if (type === 'image' || type === 'img')
       document.body.style.backgroundImage = 'url(' + source + ')';
@@ -64,7 +98,7 @@ class Page extends React.Component {
 
   render() {
     return (
-      <div>
+      <Provider store={store}>
       <Router className="fullScreen">
           <div>
             <NavigationBar onClick={(index)=>{this.onPageChange(index)}}/>
@@ -78,7 +112,7 @@ class Page extends React.Component {
                   <Route path="/about" component={
                     () => <About changeBackground={this.changeBackground} />
                   }/>
-                  <Route path="/events" component={Events}/>
+                  <Route path="/events" err={this.state.error} component={Events}/>
                   <Route path="/blog" component={Blog}/>
                   <Route path="/contact" component={Contact}/>
                   <Route component={ERROR} />
@@ -89,7 +123,7 @@ class Page extends React.Component {
           <Footer />
         </div>
       </Router>
-      </div>
+      </Provider>
     );
   }
 }

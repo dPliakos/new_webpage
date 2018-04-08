@@ -4,7 +4,7 @@ import {Row, Col} from 'react-bootstrap';
 import {Switch, Route } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import blogpost from './blogpost.js';
-import blogposts from './data/blog_data.js'
+import blogposts from './../data/blog_data.js'
 import 'bootstrap/dist/css/bootstrap.css';
 
 
