@@ -1,12 +1,12 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
-import ieee from './img/IEEELogo.png';
-import ieeeExplore from './img/IEEEEXPLORELogo.png';
-import ieeeSpectrum from './img/IEEESPECTRUMLogo.png';
+import ieee from './../img/IEEELogo.png';
+import ieeeExplore from './../img/IEEEEXPLORELogo.png';
+import ieeeSpectrum from './../img/IEEESPECTRUMLogo.png';
 import {Link} from 'react-router-dom';
 
 import 'font-awesome/css/font-awesome.min.css';
-import './style/footer.css';
+import './../style/footer.css';
 
 class SocialLinks extends React.Component {
   render () {

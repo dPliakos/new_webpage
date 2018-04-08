@@ -1,9 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './style/events.css';
-import './style/main.css';
-import events from "./data/myevents.js";
+import './../style/events.css';
+import './../style/main.css';
+import events from "../data/myevents.js";
 import {Row, Col} from 'react-bootstrap';
+import store from './../../store.js';
 /*
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
@@ -18,6 +19,13 @@ export default class Event extends React.Component {
     this.state={
       //match: {}
     }
+  }
+
+  componentWillMount() {
+    store.dispatch({
+      type: "EVENT_LOAD",
+      payload: this.props.match.params.title
+    });
   }
 
   getInitialState() {

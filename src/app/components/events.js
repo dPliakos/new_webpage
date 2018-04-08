@@ -1,13 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
-import './style/events.css';
-import './style/main.css';
-import events from "./data/myevents.js";
+import './../style/events.css';
+import './../style/main.css';
+import 'font-awesome/css/font-awesome.min.css';
 import Event from "./event.js";
 import {Row, Col, Panel, Collapse} from 'react-bootstrap';
 import {Switch, Route, Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
-import 'font-awesome/css/font-awesome.min.css';
+import store from './../../store.js';
 
 class LabeledIcon extends React.Component {
   render() {
@@ -128,11 +129,12 @@ class EventsIndex extends React.Component {
   constructor({test}){
 
     super();
-    this.state = {
-      events: events.events,
-      pastEvents: events.pastevents
-    };
+    // this.state = {
+    //   events: events.events,
+    //   pastEvents: events.pastevents
+    // };
   }
+
 
   render() {
     return (
@@ -143,7 +145,7 @@ class EventsIndex extends React.Component {
         </Col>
       </Row>
       <Row>
-        {this.state.events.map(
+        {this.props.eventsState.recentEvents.map(
           (event, i)=>{
           return <EventShort isUpcoming={true} key={i} date={event.date}
               location={event.location} title={event.title} description={event.description}
@@ -158,7 +160,7 @@ class EventsIndex extends React.Component {
       </Row>
       <Row>
         <Col>
-        {this.state.pastEvents.map(
+        {this.props.eventsState.pastEvents.map(
           (event, i)=>{
           return <EventShort isUpcoming={false} key={i} date={event.date}
               location={event.location} title={event.title} description={event.description}
@@ -176,10 +178,17 @@ class EventsIndex extends React.Component {
 export default class Events extends React.Component {
 
   render() {
+
+    const mapStateToProps = function(store) {
+    return {
+      eventsState: store.eventsState
+    };
+  }
+
     return (
       <Switch>
         <Route exact path={this.props.match.path + "/:title"} component={Event} />
-        <Route exact path="/events" component={EventsIndex} />
+        <Route exact path="/events" component={connect(mapStateToProps)(EventsIndex)} />
       <EventsIndex />
       </Switch>
     );

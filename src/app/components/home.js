@@ -3,12 +3,14 @@ import {Row, Col, Panel, Button} from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import './style/home.css';
-import  imgData from './data/testData.js';
-import  events from './data/myevents.js';
+import './../style/home.css';
+import  imgData from './../data/testData.js';
+import  events from './../data/myevents.js';
+import store from './../../store.js';
+// import messages from './../data/testData.js';
 
 
-class SmallEvent  extends React.Component {
+class SmallEvent extends React.Component {
    render() {
      const event = this.props.event;
      const desc = `${event.date} @${event.location}`;
@@ -34,6 +36,11 @@ class SmallEventsPanel extends React.Component {
     this.state = {
       events: events.events
     }
+
+    const unsubscribe = store.subscribe(() =>
+      console.log(store.getState()
+    ));
+    console.log(store.getState());
   }
 
   render() {
