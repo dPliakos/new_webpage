@@ -4,11 +4,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './../style/events.css';
 import './../style/main.css';
 import 'font-awesome/css/font-awesome.min.css';
-import Event from "./event.js";
-import {Row, Col, Panel, Collapse} from 'react-bootstrap';
+import {Row, Col, Panel, Collapse, Pagination} from 'react-bootstrap';
 import {Switch, Route, Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import store from './../../store.js';
+import Event from "./event.js";
+import PaginatedList from './paginatedList.js';
+import {EVENT_LOAD_RECENT, EVENT_LOAD_OLD, EVENT_SET_NUMBER_OF_PAGES} from './../actions/eventActions.js';
+
+
 
 class LabeledIcon extends React.Component {
   render() {
@@ -102,8 +106,6 @@ class EventShort extends React.Component {
 
   render() {
     return(
-      <Col md={8} mdOffset={2} >
-
         <Panel className={"eventPanel " + (this.state.open ? "eventPanelActive" : "eventPanelInactive")}>
           <div onClick={ ()=> {this.changeStatus()} } >
             <EventHeader date={this.props.date} title={this.props.title} status={this.state.open} />
@@ -117,26 +119,52 @@ class EventShort extends React.Component {
             </div>
           </Collapse>
         </Panel>
-
-
-      </Col>
     );
   }
 }
 
 class EventsIndex extends React.Component {
 
-  constructor({test}){
-
-    super();
-    // this.state = {
-    //   events: events.events,
-    //   pastEvents: events.pastevents
-    // };
-  }
-
-
   render() {
+
+    const recentEvents = this.props.eventsState.recentEvents.map(
+        (event, i)=>{
+        return <EventShort isUpcoming={true} key={i} date={event.date}
+            location={event.location} title={event.title} description={event.description}
+            image={event.image} organizer={event.organizer}/>
+        }
+      );
+
+    const pastEvents = this.props.eventsState.pastEvents.map(
+        (event, i)=>{
+        return <EventShort isUpcoming={false} key={i} date={event.date}
+            location={event.location} title={event.title} description={event.description}
+            image={event.image} organizer={event.organizer}/>
+        }
+      );
+
+    const eventsPerPage = this.props.eventsState.eventsPerPage;
+    const numberOfPages = this.props.eventsState.numberOfPages;
+    const needsPagination = numberOfPages > 1;
+    let pagination = (<div> </div>);
+
+    if (needsPagination) {
+      pagination = (
+        <Row>
+          <Col md={8} mdOffset={2}>
+            <PaginatedList numberOfPages={numberOfPages} active={this.props.eventsState.activeIndex}
+            activateIndex={(index)=>{store.dispatch({
+              type: EVENT_LOAD_OLD,
+              payload: index
+            })}} 
+            maximumPages={1}
+            />
+          </Col>
+        </Row>
+      );
+    }
+
+
     return (
     <div id='main-content'>
       <Row>
@@ -145,13 +173,9 @@ class EventsIndex extends React.Component {
         </Col>
       </Row>
       <Row>
-        {this.props.eventsState.recentEvents.map(
-          (event, i)=>{
-          return <EventShort isUpcoming={true} key={i} date={event.date}
-              location={event.location} title={event.title} description={event.description}
-              image={event.image} organizer={event.organizer}/>
-          }
-        )}
+        <Col md={8} mdOffset={2}>
+          {recentEvents}
+        </Col>
       </Row>
       <Row>
         <Col mdOffset={2} >
@@ -159,23 +183,30 @@ class EventsIndex extends React.Component {
         </Col>
       </Row>
       <Row>
-        <Col>
-        {this.props.eventsState.pastEvents.map(
-          (event, i)=>{
-          return <EventShort isUpcoming={false} key={i} date={event.date}
-              location={event.location} title={event.title} description={event.description}
-              image={event.image} shortdescription={event.shortdescription}
-              organizer={event.organizer}/>
-          }
-        )}
+        <Col md={8} mdOffset={2}>
+          {pastEvents}
         </Col>
       </Row>
+      {pagination}
     </div>
     );
   }
 }
 
 export default class Events extends React.Component {
+
+  componentWillMount() {
+    store.dispatch({
+      type: EVENT_SET_NUMBER_OF_PAGES
+    })
+    store.dispatch({
+      type: EVENT_LOAD_OLD,
+      payload: 0
+    })
+  }
+
+
+
 
   render() {
 

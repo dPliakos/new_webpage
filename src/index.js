@@ -79,9 +79,7 @@ class Page extends React.Component {
         type: EVENT_LOAD_RECENT,
         payload: newEvents
       })
-    })).then((response)=>{
-      console.log(store.getState());
-    })
+    }))
   }
 
   changeBackground(type, source) {
