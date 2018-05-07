@@ -84,3 +84,18 @@ a {
   list-style-type: none;
   padding: 10px;
 }
+
+.light {
+  background-color: #f4f4f4;
+  color:   #666464;
+}
+
+.dark {
+  background-color: #666464;
+  color: #f4f4f4;
+}
+
+.formInvalid {
+  box-shadow: 2px 2px 2px 2px red;
+  color: red;
+}

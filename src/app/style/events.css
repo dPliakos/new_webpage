@@ -70,3 +70,12 @@ a:hover {
 	text-align: justify;
 	margin-top: 40px;
 }
+
+.timeSelect {
+	border: none;
+	box-shadow: none;
+}
+
+.highEditor {
+	height: 400px;
+}
