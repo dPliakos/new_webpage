@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {Row, Col, Panel, Button} from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
@@ -7,6 +8,7 @@ import './../style/home.css';
 import  imgData from './../data/testData.js';
 import  events from './../data/myevents.js';
 import store from './../../store.js';
+import {EVENT_LOAD_NEW, EVENT_REQUEST_NEW, EVENT_REQUEST_OLD, } from './../actions/eventActions.js';
 // import messages from './../data/testData.js';
 
 
@@ -31,30 +33,50 @@ class SmallEvent extends React.Component {
 
 class SmallEventsPanel extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      events: events.events
-    }
+  // constructor() {
+  //   super();
+  //   // this.state = {
+  //   //   events: events.events
+  //   // }
 
-    const unsubscribe = store.subscribe(() =>
-      console.log(store.getState()
-    ));
-    console.log(store.getState());
+  //   // const unsubscribe = store.subscribe(() =>
+  //   //   console.log(store.getState()
+  //   // ));
+  //   // console.log(store.getState());
+  // } 
+  componentWillMount() {
+     store.dispatch({
+      type: EVENT_REQUEST_NEW,
+      payload: true
+    })
+    store.dispatch({
+      type: EVENT_LOAD_NEW,
+      payload: 0
+    })
   }
 
+
   render() {
+
+    const newEventsHeader = this.props.eventsState.requestSuccessNew && this.props.eventsState.recentEvents.length > 0
+            ? <h3> Upcoming Events </h3>
+            : <div> </div>;
+
+    let newEventsBody = this.props.eventsState.requestSuccessNew && this.props.eventsState.recentEvents.length > 0 
+            ? this.props.eventsState.recentEvents.map(
+                (event, i ) => {
+                  return <SmallEvent event={event} key={i} type={`smallEventType_${i%3}`} />
+                }
+              )
+            : <div> </div>;
+
     return (
       <div>
       <Row>
-        <h3> Upcoming events: </h3>
+        {newEventsHeader}
       </Row>
       <Row>
-          { this.state.events.map(
-            (event, i ) => {
-              return <SmallEvent event={event} key={i} type={`smallEventType_${i%3}`} />
-            }
-          )}
+          { newEventsBody }
       </Row>
       </div>
     );
@@ -82,12 +104,21 @@ class Header extends React.Component {
 class MainPanel extends React.Component {
 
   render() {
+
+    const mapStateToProps = function(store) {
+      return {
+        eventsState: store.eventsState
+      };
+    }
+
+    const Events = connect(mapStateToProps)(SmallEventsPanel);
+
     return(
       <div className="transparent" >
         <Col md={12} sm={12} xs={10} mdOffset={0} xsOffset={1}>
           <Header  />
           <Row className="topSpacer">
-            <SmallEventsPanel />
+            <Events />
           </Row>
         </Col>
       </div>

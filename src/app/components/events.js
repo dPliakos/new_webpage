@@ -10,8 +10,9 @@ import FontAwesome from 'react-fontawesome';
 import store from './../../store.js';
 import Event from "./event.js";
 import PaginatedList from './paginatedList.js';
-import {EVENT_LOAD_RECENT, EVENT_LOAD_OLD, EVENT_SET_NUMBER_OF_PAGES} from './../actions/eventActions.js';
-
+import {EVENT_LOAD_NEW, EVENT_LOAD_OLD, EVENT_REQUEST_NEW, 
+  EVENT_REQUEST_OLD, EVENT_SET_NUMBER_OF_PAGES} from './../actions/eventActions.js';
+import {NewEvent} from './event_create.js';
 
 
 class LabeledIcon extends React.Component {
@@ -53,7 +54,6 @@ class EventHeader extends React.Component {
       </Row>
     );
   }
-
 }
 
 class EventBody extends React.Component {
@@ -127,7 +127,28 @@ class EventsIndex extends React.Component {
 
   render() {
 
-    const recentEvents = this.props.eventsState.recentEvents.map(
+    // setup the headers of the two categories
+    // fill if there are events, blank otherwise
+    const newEventsHeader = this.props.eventsState.requestSuccessNew && this.props.eventsState.recentEvents.length > 0
+            ? <h3> Upcoming Events </h3>
+            : <div> </div>;
+
+    const pastEventsHeader = this.props.eventsState.requestSuccessOld && this.props.eventsState.pastEvents.length > 0
+            ? <h3> Past Events </h3>
+            : <div> </div>;
+
+
+    // In order to decide if the events are loading, loaded or absent
+    // check the reducer's flags and show what should be shown.
+    let newEventsBody;
+
+    // While wating for server respnse:
+    if (this.props.eventsState.requestSentNew) {
+      newEventsBody = <img src="http://static.tumblr.com/0018b4de0800b3e822bc5a7895ccfc62/6hwmdmr/4Xxofbm0i/tumblr_static_6ie2g0loxdc8c8s8sks0s8wsw.gif" />
+
+      // when events loaded successfully:
+    } else if (this.props.eventsState.requestSuccessNew && this.props.eventsState.recentEvents.length > 0) {
+      newEventsBody = this.props.eventsState.recentEvents.map(
         (event, i)=>{
         return <EventShort isUpcoming={true} key={i} date={event.date}
             location={event.location} title={event.title} description={event.description}
@@ -135,7 +156,32 @@ class EventsIndex extends React.Component {
         }
       );
 
-    const pastEvents = this.props.eventsState.pastEvents.map(
+      // when there are no new events:
+    } else {
+      newEventsBody = (
+        <div>
+          <Row className="topSpacer">
+            <Col md={6} mdOffset={3}> 
+              <h3> There are no upcoming events </h3>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={10} mdOffset={2}>
+              <h4> Follow us on facebook, instagram and twitter to stay updated </h4>
+            </Col>
+          </Row>
+        </div>
+        )
+    }
+
+    let pastEventsBody;
+    // when wating for server response
+    if (this.props.eventsState.requestSentOld) {
+      pastEventsBody = <img src="http://static.tumblr.com/0018b4de0800b3e822bc5a7895ccfc62/6hwmdmr/4Xxofbm0i/tumblr_static_6ie2g0loxdc8c8s8sks0s8wsw.gif" />
+
+      // when events where fetch successfully:
+    } else if (this.props.eventsState.requestSuccessOld && this.props.eventsState.pastEvents.length > 0) {
+      pastEventsBody =  this.props.eventsState.pastEvents.map(
         (event, i)=>{
         return <EventShort isUpcoming={false} key={i} date={event.date}
             location={event.location} title={event.title} description={event.description}
@@ -143,6 +189,13 @@ class EventsIndex extends React.Component {
         }
       );
 
+    // when there are no past events: 
+    } else {
+      pastEventsBody = <div> </div>
+    }
+
+
+    // initialize pagination
     const eventsPerPage = this.props.eventsState.eventsPerPage;
     const numberOfPages = this.props.eventsState.numberOfPages;
     const needsPagination = numberOfPages > 1;
@@ -165,26 +218,27 @@ class EventsIndex extends React.Component {
     }
 
 
+
     return (
     <div id='main-content'>
       <Row>
         <Col mdOffset={2} >
-          <h3>Upcoming Events</h3>
+          {newEventsHeader}
         </Col>
       </Row>
       <Row>
         <Col md={8} mdOffset={2}>
-          {recentEvents}
+          {newEventsBody}
         </Col>
       </Row>
       <Row>
         <Col mdOffset={2} >
-          <h3>Past Events</h3>
+          {pastEventsHeader}
         </Col>
       </Row>
       <Row>
         <Col md={8} mdOffset={2}>
-          {pastEvents}
+          {pastEventsBody}
         </Col>
       </Row>
       {pagination}
@@ -200,24 +254,33 @@ export default class Events extends React.Component {
       type: EVENT_SET_NUMBER_OF_PAGES
     })
     store.dispatch({
+      type: EVENT_REQUEST_NEW,
+      payload: true
+    })
+    store.dispatch({
+      type: EVENT_REQUEST_OLD,
+      payload: true
+    })
+    store.dispatch({
+      type: EVENT_LOAD_NEW,
+      payload: 0
+    })
+    store.dispatch({
       type: EVENT_LOAD_OLD,
       payload: 0
     })
   }
 
-
-
-
   render() {
-
     const mapStateToProps = function(store) {
-    return {
-      eventsState: store.eventsState
-    };
-  }
+      return {
+        eventsState: store.eventsState
+      };
+    }
 
     return (
       <Switch>
+        <Route exact path={this.props.match.path + "/submit"} component={NewEvent} />
         <Route exact path={this.props.match.path + "/:title"} component={Event} />
         <Route exact path="/events" component={connect(mapStateToProps)(EventsIndex)} />
       <EventsIndex />
