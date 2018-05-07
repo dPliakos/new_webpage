@@ -67,26 +67,97 @@ class ContactPanel extends React.Component {
 }
 
 class FormUnit extends React.Component {
+
+  getState = this.props.onChange == null
+    ? () => {return;}
+    : (evt) => {this.props.onChange(evt.target.value)};
+
   render() {
     return(
       <div className="topSpacer">
-        <input type={this.props.type} id={this.props.id} placeholder={this.props.name}/>
+        <input type={this.props.type} id={this.props.id} placeholder={this.props.name} onChange={this.getState}/>
       </div>
     );
   }
 }
 
 class Form extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+      messageSent: false,
+      complete: false,
+      error: false
+    }
+  }
+
+  getName = (name) => {this.setState({name: name})};
+  getEmail = (mail) =>{this.setState({email: mail})};
+  getSubject = (sub) =>{this.setState({subject: sub})};
+  getMessage = (message) => {this.setState({message: message})};
+  sendMessage = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    const body = JSON.stringify(this.state);
+    var myInit = { method: 'POST',
+                   headers: myHeaders,
+                   body: body,
+                   mode: 'cors',
+                   cache: 'default' };
+    console.log(myInit);
+    fetch("http://localhost:3001/messages", myInit)
+      .then((res) => {this.setState({
+                              /*complete: (JSON.parse(res.blob()).code === 0)*/
+                              complete: true
+                            })})
+      .then((res) => {this.setState({messageSent: true, error: false}); console.log("message: ok")})
+      .catch((err) => {this.setState({messageSent: false, error: true}); console.log(err)})
+  }
+
+  // clean() {
+  //   this.setState({
+  //     name: "",
+  //     email: "",
+  //     subject: "",
+  //     message: "",
+  //     messageSent: false,
+  //     complete: false,
+  //     error: false
+  //   });
+
+  //   // clean form 
+  //   console.log("hello!");
+  // }
+
+
+
+
   render() {
+
+    const success = this.state.complete === true ? "Message sent!" : "";
+    const error   = this.state.error    === true ? "Message could not be sent": "";
+
+    const message = <div> {success} </div>;
+    const form = (
+            <div className="contactForm">
+              <FormUnit name="Name" type="text" id="userName" onChange={this.getName} />
+              <FormUnit name="Email" type="text" id="userEmail" onChange={this.getEmail}/>
+              <FormUnit name="Subject" type="text" id="userSubject" onChange={this.getSubject} />
+              {/*<label> Message </label> <br/>*/}
+              <textarea id="userMessage" placeholder="Message" className="topSpacer" onChange={this.getMessage}></textarea>
+              <Button type="button" onClick={this.sendMessage}> Send Message </Button>
+            </div>
+    );
+
+    const body = this.state.complete ? message : form;
+
     return(
-      <div className="contactForm">
-        <FormUnit name="Name" type="text" id="userName" />
-        <FormUnit name="Email" type="text" id="userEmail" />
-        <FormUnit name="Subject" type="text" id="userSubject" />
-        {/*<label> Message </label> <br/>*/}
-        <textarea id="userMessage" placeholder="Message" className="topSpacer"></textarea>
-        <Button type="submit"> Send Message </Button>
-      </div>
+      <div> {body} </div>
     );
   }
 }
