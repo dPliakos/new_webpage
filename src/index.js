@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 import {Provider} from "react-redux";
 import store from "./store.js";
-import {EVENT_LOAD_RECENT} from './app/actions/eventActions.js';
+import {EVENT_LOAD_NEW} from './app/actions/eventActions.js';
 
 
 
@@ -66,20 +66,20 @@ class Page extends React.Component {
   componentWillMount() {
     let newEvents;
 
-    fetch('http://localhost:3001/events').then((response)=>{
-      return response.json();
-    }, (err)=>{
-      this.setState({error: true});
-    }).then((response)=>{
-      newEvents = response;
-    }, (err)=>{
-      console.error(err);
-    }).then((response=>{
-      store.dispatch({
-        type: EVENT_LOAD_RECENT,
-        payload: newEvents
-      })
-    }))
+    // fetch('http://localhost:3001/events').then((response)=>{
+    //   return response.json();
+    // }, (err)=>{
+    //   this.setState({error: true});
+    // }).then((response)=>{
+    //   newEvents = response;
+    // }, (err)=>{
+    //   console.error(err);
+    // }).then((response=>{
+    //   store.dispatch({
+    //     type: EVENT_LOAD_NEW,
+    //     payload: newEvents
+    //   })
+    // }))
   }
 
   changeBackground(type, source) {

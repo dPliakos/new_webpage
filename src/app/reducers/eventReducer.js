@@ -7,25 +7,16 @@ const initial = {
   pastEvents: [], //events.pastevents,  
   dateLimit_recent: null,
   dateLimit_older: null,
-  requestSent: false,    //  |
-  requestSuccess: false, //  |Request handling
-  requestError: false,   //  |
+  requestSentOld: false,    //  |
+  requestSuccessOld: false, //  |Request handling old
+  requestErrorOld: false,   //  |
+  requestSentNew: false,    //  |
+  requestSuccessNew: false, //  |Request handling new
+  requestErrorNew: false,   //  |
   activeIndex: 0,
   eventsPerPage: 3,
   numberOfPages: 0
 }
-
-/*
-EVENT_LOAD
-EVENT_LOAD_RECENT
-EVENT_LOAD_OLD
-EVENT_LOAD_ALL
-EVENT_SET_REQUEST
-EVENT_SET_SUCCESS 
-EVENT_SET_ERROR
-EVENT_SET_EVENTS_PER_PAGE
-EVENT_ADD_NEW
-*/
 
 
 const eventReducer = (state=initial, action) => {
@@ -36,13 +27,32 @@ const eventReducer = (state=initial, action) => {
     case eventActions.EVENT_LOAD:
       return state;
       break;
-    case eventActions.EVENT_LOAD_RECENT:
+    case eventActions.EVENT_REQUEST_NEW:
+      if (!action.payload) action.payload = false;
+      const newEventsRequestUpdated = {
+        ...state,
+        requestSentNew: action.payload
+      }
+      return newEventsRequestUpdated;
+      break;
+    case eventActions.EVENT_REQUEST_OLD:
+      if (!action.payload) action.payload = false;
+      const oldEventsRequestUpdated = {
+        ...state,
+        requestSentOld: action.payload
+      }
+      return oldEventsRequestUpdated;
+      break;
+    case eventActions.EVENT_LOAD_NEW:
       var newState = {
         ...state,
-        recentEvents: events.events
+        recentEvents: events.events,
+        requestSentNew: false,
+        requestSuccessNew: true,
+        //recentEvents: []
       }
       return newState;
-    break;
+      break;
     case eventActions.EVENT_LOAD_OLD: 
       if (!action.payload) {
         action.payload = 0;
@@ -56,6 +66,8 @@ const eventReducer = (state=initial, action) => {
       }
       var newState = {
         ...state,
+        requestSentOld: false,
+        requestSuccessOld: true,
         activeIndex: action.payload,
         pastEvents: pastEvents
       }
