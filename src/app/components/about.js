@@ -1,234 +1,270 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Link} from 'react-router-dom';
+import {Link, Route, Switch, Redirect} from 'react-router-dom';
+import {LinkContainer} from 'react-router-bootstrap';
 import './../style/about.css';
 import './../style/main.css';
+import {Row, Col, Button, ButtonGroup} from 'react-bootstrap';
+import aboutData from './../data/about_data.js';
+import 'bootstrap/dist/css/bootstrap.css';
+import img from './../img/profile.jpg';
+import FontAwesome from 'react-fontawesome';
+import 'font-awesome/css/font-awesome.min.css';
+import fa_icons from "./../data/faIcons.js";
 
 
-class Header extends React.Component {
-
+class SocialIcon extends React.Component {
+  // to do use redux to update social tags
   render() {
     return (
-
-      <header className="masthead">
-	             <div className="intro-body">
-	              <div className="container">
-          		   <div className="row">
-            		<div>
-	                   <h1 className="brand-heading">IEEE</h1>
-	                   <p className="intro-text">Press the button to scroll down and learn more</p>
-                       <a href="#about1" className="btn  btn-circle js-scroll-trigger">
-                        <i className="fa fa-angle-double-down animated"></i>
-                       </a>
-	             </div>
-	            </div>
-	           </div>
-	          </div>
-    </header>
+      <LinkContainer to={this.props.target} className="inline padding5">
+        <div> <FontAwesome name={this.props.icon} className="small-social" /> </div>
+      </LinkContainer>
     );
   }
 }
 
-class About1 extends React.Component {
+class SocialRow extends React.Component {
   render() {
+    const row = this.props.social.map((medium, i)=>{
+      const icon_final = fa_icons[medium.label];
+      return <SocialIcon target="#" icon={icon_final} key={i}/>;
+    });
+
     return (
-    <section id="about1" className="content-section text-center">
-      <div className="container">
-        <div className="row">
-         <h2>ΤΙ ΕΙΝΑΙ Η IEEE</h2>
-          <div className="stl">
-
-            <p>
-	             Η ΙΕΕΕ (Institute of Electrical and Electronic Engineers)
-	             είναι μια παγκόσμια τεχνολογική, επαγγελματική, μη πολιτική οργάνωση
-	             με σκοπό την προώθηση της θεωρίας και των εφαρμογών της επιστήμης του
-	             Ηλεκτρολόγου Μηχανικού και Μηχανικού Υπολογιστών για την εξέλιξη του επαγγέλματος
-	             με γνώμονα την κοινωνική προσφορά.
-            </p>
-
-            <p>
-	            Στην ΙΕΕΕ είναι σήμερα εγγεγραμμένα περισσότερα από 400.000 μέλη εκ των
-	            οποίων περισσότεροι από 90.000 φοιτητές, σε περισσότερες από 160 χώρες, γεγονός
-	            που την καθιστά τη μεγαλύτερη τεχνολογική επαγγελματική κοινότητα στον κόσμο.
-            </p>
-          </div>
-          <a href="#about2" className="btn btn-circle js-scroll-trigger">
-              <i className="fa fa-angle-double-down animated"></i>
-          </a>
-        </div>
+      <div>
+        {row}
       </div>
-    </section>
-    );
+    )
   }
 }
 
-class About2 extends React.Component {
+class MemberSmall extends React.Component {
   render() {
     return (
-    <section id="about2" className="content-section text-center">
-      <div className="container">
-        <div className="row">
-         <h2>Οι φοιτητΕς στην ΙΕΕΕ</h2>
-          <div className="stl">
-
-            <p>Οι φοιτητές παίζουν καθοριστικό ρόλο για την IEEE. Σήμερα υπάρχουν περισσότερες
-	            από 2000 φοιτητικές ομάδες της ΙΕΕΕ στον κόσμο. Σκοπός τους είναι να παρέχουν στους
-	            προπτυχιακούς και μεταπτυχιακούς φοιτητές, που ενδιαφέρονται για την επιστήμη του
-	            Ηλεκτρολόγου Μηχανικού, Μηχανικού Υπολογιστών ή συγγενείς επιστήμες, ευκαιρίες
-	            για ακαδημαϊκή, τεχνολογική και επαγγελματική εξέλιξη.
-            </p>
-          </div>
-           <a href="#about3" className="btn btn-circle js-scroll-trigger">
-              <i className="fa fa-angle-double-down animated"></i>
-          </a>
-        </div>
+      <div className="topSpacer">
+          <Row > 
+            <Col md={10} mdOffset={1} >
+              <img src={this.props.img == null ? img : this.props.img} className="" className="aboutProfileImg"/>
+            </Col>
+          </Row>
+          <Row> 
+            <Col md={11} className="dark marign" mdOffset={1}>
+              <div className="roundedCorners padding2" > 
+                {this.props.label} 
+              </div>
+              {<SocialRow social={this.props.social}/>}
+            </Col>
+          </Row>
       </div>
-    </section>
     );
   }
 }
 
-class About3 extends React.Component {
+class Members extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      members: []
+    }
+  }
+
+  componentWillMount() {
+    this.parseMembers();
+  }
+
+  parseMembers() {
+    const step = 4;
+    const memberList = this.props.members;
+    let allMembers = [];
+
+    for (let i=0; i<memberList.length; i+= step) {
+      const teamsOfThree = memberList.slice(i, i+step);
+      
+      const completedRow = teamsOfThree.map((person, i)=>{
+        return <Col md={3} key={i}> <MemberSmall img={person.img} label={person.name} social={person.social} key={i}/> </Col>;
+      });
+      allMembers = allMembers.concat([completedRow]);
+    }
+
+    this.setState({members: allMembers});
+  }
+
   render() {
+    console.log("state:");
+    console.log(this.state.members);
+    const members = this.state.members;
+
     return (
-    <section id="about3" className="content-section text-center">
-      <div className="container">
-        <div className="row">
-         <h2>ΔραστηριΟτητες απΟ φοιτητικΕς ομΑδες</h2>
-          <div className="stl">
-            <ul className="text-left">
-              <li><p>Διοργάνωση σεμιναρίων, συνεδρίων (workshops) και ομιλιών από διακεκριμένους επιστήμονες με σκοπό την επιμόρφωση και ενημέρωση των φοιτητών γύρω από θέματα που αφορούν την επιστήμη των Ηλεκτρολόγων Μηχανικών, Μηχανικών Υπολογιστών ή παρεμφερείς επιστήμες.</p></li>
-              <li><p>Διοργάνωση εκπαιδευτικών εκδρομών και επισκέψεων σε εταιρείες και ιδρύματα που ασχολούνται με την έρευνα και την ανάπτυξη συγγενών επιστημονικών πεδίων.</p></li>
-              <li><p>Συμμετοχή σε φοιτητικούς διαγωνισμούς υπό την αιγίδα της ΙΕΕΕ ή άλλων τεχνολογικών οργανισμών.</p></li>
-              <li><p>Ενημέρωση των φοιτητών σχετικά με τις δραστηριότητες της ΙΕΕΕ και τις δυνατότητες που τους παρέχονται από την οργάνωση.</p></li>
-              <li><p>Διοργάνωση διαγωνισμών και βραβείων με σκοπό την διάκριση της.</p></li>
-            </ul>
-          </div>
-           <a href="#about4" className="btn btn-circle js-scroll-trigger">
-              <i className="fa fa-angle-double-down animated"></i>
-          </a>
-        </div>
+      <div>
+          {members.map((row, i)=>{
+            return (<Row key={i}> {row} </Row>)
+          })}
       </div>
-    </section>
     );
   }
 }
 
-class About4 extends React.Component {
+class AboutParagraph extends React.Component {
   render() {
     return (
-    <section id="about4" className="content-section text-center">
-      <div className="container">
-        <div className="row">
-         <h2>ΓιατI να γIνεις μEλος στην IEEE</h2>
-          <div className="stl">
-            <p>
-               Η εγγραφή ενός φοιτητή ως μέλος της ΙΕΕΕ του παρέχει όλα τα προνόμια
-               ενός κανονικού μέλους με το συγκριτικό πλεονέκτημα της πολύ μικρότερης
-               συνδρομής. Η ΙΕΕΕ μέσω των πρωτοποριακών θεμάτων που πραγματεύεται και
-               τη συμμετοχή σε διάφορες επαγγελματικές δραστηριότητες, συνέδρια κ.ά.,
-               σου δίνει τη δυνατότητα να είσαι ενήμερος της προόδου της τεχνολογίας και
-                του κλάδου σου, των τελευταίων τάσεων της βιομηχανίας και – το πιο σημαντικό –
-                σε βοηθάει τελικά στην καριέρα σου.
-            </p>
-          </div>
-           <a href="#about5" className="btn btn-circle js-scroll-trigger">
-              <i className="fa fa-angle-double-down animated"></i>
-          </a>
-        </div>
+      <div>
+        <h3> {this.props.header}</h3>
+        <p> {this.props.body} </p>
       </div>
-    </section>
     );
   }
 }
 
-
-class About5 extends React.Component {
+class AboutBullets extends React.Component {
   render() {
     return (
-    <section id="about5" className="content-section text-center">
-      <div className="container">
-        <div className="row">
-         <h2>ΟφΕλη μΕλους της IEEE</h2>
-          <div className="stl">
-            <ul className="text-left">
-              <li><p>Λαμβάνεις το βραβευμένο μηνιαίο περιοδικό ΙΕΕΕ Spectrum, το οποίο περιλαμβάνει άρθρα για την κατάσταση του επαγγέλματος, ευκαιρίες για την καριέρα και την εκπαίδευση καθώς και αφιερώματα στις πιο πρόσφατες τεχνολογικές εξελίξεις και τις εφαρμογές τους.</p></li>
-              <li><p>Έχεις δωρεάν ηλεκτρονική πρόσβαση στο περιοδικό POTENTIALS για φοιτητές και νέους επαγγελματίες.</p></li>
-              <li><p>Μπορείς να πάρεις μέρος σε φοιτητικούς διαγωνισμούς που διοργανώνει η ΙΕΕΕ (όπως IEEEXtreme, Student Paper Contest κ.ά.) και να διακριθείς σε διεθνές επίπεδο.</p></li>
-              <li><p>Μπορείς να διεκδικήσεις υποτροφίες για μέλη της ΙΕΕΕ.</p></li>
-              <li><p>Αποκτάς δωρεάν @ieee.org email alias σε συνεργασία της ΙΕΕΕ με τη Google.</p></li>
-              <li><p>Έχεις πρόσβαση σε καταλόγους προσφοράς εργασίας σε ευρωπαϊκό και διεθνές επίπεδο και σε εργαλεία προώθησης της καριέρας σου.</p></li>
-              <li><p>Μπορείς να συμμετάσχεις σε φοιτητικά συνέδρια και συναντήσεις με άλλα μέλη στην Ελλάδα ή το εξωτερικό με σκοπό να ανταλλάξεις γνώσεις και απόψεις.</p></li>
-              <li><p>Μπορείς να συμμετάσχεις σε όλα τα διεθνή επιστημονικά συνέδρια που διοργανώνει η ΙΕΕΕ έχοντας ειδικές χαμηλές φοιτητικές τιμές.</p></li>
-              <li><p>Εξοικονομείς χρήματα με σημαντικές εκπτώσεις σε πάνω από 15.000 βιβλία που εκδίδει η ΙΕΕΕ.</p></li>
-              <li><p>Λαμβάνεις οικονομική ενίσχυση για μεταφορά σε επιστημονικό συνέδριο στο οποίο έχεις δημοσίευση.</p></li>
-              <li><p>Χρησιμοποιείς το εργαλείο IEEE Xplore για εύκολη εύρεση οποιουδήποτε επιστημονικού άρθρου και πρόσβαση σε αυτό αν περιλαμβάνεται στη συνδρομή σου.</p></li>
-            </ul>
-          </div>
-           <a href="#about6" className="btn btn-circle js-scroll-trigger">
-              <i className="fa fa-angle-double-down animated"></i>
-          </a>
-        </div>
+      <div>
+        <h3> {this.props.title} </h3>
+        <ul>
+          {this.props.body.map(
+            (bullet, i)=>{return <li key={i}> {bullet} </li>}
+          )}
+        </ul>
       </div>
-    </section>
     );
   }
 }
 
+class AboutIEEE extends React.Component {
+  render() {
 
-class About6 extends React.Component {
+    const abstract = aboutData.aboutData.abstract;
+    const activities = aboutData.aboutData.activities;
+    const whyMemeber = aboutData.aboutData.whyBecomeAMemeber;
+    const benefits = aboutData.aboutData.benefits;
+    const subscribe = aboutData.aboutData.subscribe;
+
+    return (
+      <div>
+        <AboutParagraph header={activities.header} body={abstract.body} />
+        <AboutBullets header={activities.header} body={activities.body} />
+        <AboutParagraph header={whyMemeber.header} body={whyMemeber.body} />
+        <AboutBullets   header={benefits.header}   body={benefits.body} />
+        <AboutParagraph header={subscribe.header}  body={subscribe.body} />
+      </div>
+    );
+  }
+}
+
+class MenuItem extends React.Component {
+
   render() {
     return (
-    <section id="about6" className="content-section text-center">
-       <div id="builder-column-529c5ea63089d" className="span12 column_first column_last">
-          <h2 className="rw-sentence">
-            <span>Ειναι μια καλη ευκαιρια να </span>
-            <br></br>
-            <div className="rw-words rw-words-2">
-				<span>ΕΝΗΜΕΡΩΘΕΙΣ</span>
-				<span>ΔΙΑΓΩΝΙΣΤΕΙΣ</span>
-				<span>ΣΥΜΜΕΤΕΧΕΙΣ</span>
-		    </div>
-		  </h2>
-		<div>
-			<a  href="http://www.ieee.org/membership_services/membership/join/index.html"
-          target="_blank" rel="noopener noreferrer"
-          className="btn btn-lg btn-primary push-top">Εγγραφή</a>
-    	</div>
-       </div>
-       <div>
-		<p className="lead">
-		  Θα θέλαμε πολύ πριν γραφτείς, να μας γνωρίσεις, να μας ρωτήσεις ότι απορία έχεις σχετικά με την ΙΕΕΕ ή με το ΑΤΕΙΤΗ Student Branch. Θα βρείς πληροφορίες
-		  στο <Link to="/blog">
-		  <span target="_blank"><span className="alternative-font">STUDENT BRANCH</span></span>
-		  </Link> για να επικοινωνήσεις με κάποιον από εμάς ή μπορείς να στείλεις μήνυμα συμπληρώνοντας την φόρμα που θα βρείς
-		  στο <Link to="/contact">
-		  <span className="alternative-font">CONTACT</span>
-		  </Link>. Επίσης μπορείς να παρευρεθείς σε οποιαδήποτε εκδήλωση ή συνάντησή μας παρακολουθώντας
-		  τα <Link to="/events">
-		  <span className="alternative-font">EVENTS</span>
-		  </Link>  μας.		</p>
-
-	   </div>
-    </section>
+      <LinkContainer to={"/about/" + this.props.title} >
+      <div className="light full-width centered roundedCorners about-navigation "  > 
+        <span> {this.props.title} </span> 
+      </div>
+      </LinkContainer>
     );
   }
 }
-export default class printAbout extends React.Component {
 
+class Menu extends React.Component {
 
   render() {
+
+    return (
+      <div>
+        <Row>
+            <Col md={4}>
+              <MenuItem title="IEEE" />
+            </Col>
+            <Col md={4}>
+              <MenuItem title="Members" />
+            </Col>
+            <Col md={4}>
+              <MenuItem title="Dev_Team" />
+            </Col>
+        </Row>
+      </div>
+    );
+  }
+
+}
+
+
+export default class About extends React.Component {
+
+constructor() {
+    super();
+    this.state ={
+      contributors: [],
+      success: false,
+      error: false
+    }
+  }
+
+  componentWillMount() {
+    this.getContributors();
+  }
+
+  getContributors(){
+    if (this.state.success) {
+      console.log("returnings");
+      return;
+    }
+    console.log("getting contributors");
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    const myInit = { method: 'GET',
+                   headers: myHeaders,
+                   mode: 'cors',
+                   cache: 'default' };
+    
+    fetch("https://api.github.com/repos/ieee-ateith-sb/new_webpage/contributors", myInit)
+      .then((res) => {
+        return res.json();
+      })
+      .then((json)=>{
+        const profiles = this.parseGithubProfiles(json);
+        this.setState({error: false, success: true, contributors: profiles});
+      });
+  }
+
+  parseGithubProfiles(list) {
+    const profiles = list.map((person)=>{
+      return {
+        name: person.login,
+        img: person.avatar_url,
+        social: [{
+          label: "github",
+          icon: "github",
+          url: person.html_url
+        }]
+      }
+    })
+    return profiles;
+  }
+  
+
+  render() {
+    const members = aboutData.aboutData.members;
+
 	  return (
 	   <div>
-	  	<Header />
-	  	<About1 />
-	  	<About2 />
-	  	<About3 />
-	  	<About4 />
-	  	<About5 />
-	  	<About6 />
+	  	<Row>
+        <Col md={10} mdOffset={1}  className="topSpacer">
+          <Menu />
+        </Col>
+        </Row>
+        <Row>
+        <Col md={10} mdOffset={1}>
+          <Switch>
+            <Route exact path={"/about"} component={()=><Redirect to="/about/IEEE" />} />
+            <Route exact path={"/about/IEEE"} component={AboutIEEE} />
+            <Route exact path={"/about/Members"} component={()=><Members members={members} />} />
+            <Route exact path={"/about/Dev_Team"} component={()=><Members members={this.state.contributors}  />} />
+          </Switch>
+        </Col>
+      </Row>
 	   </div>
-
 	  );
   }
 }
