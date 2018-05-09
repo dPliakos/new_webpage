@@ -1,10 +1,20 @@
 
+.smallEventsBar {
+  background-color: #393939;
+}
+
 .smallEventsPanel {
- height: 100vh;
+ min-height: 100px;
+ margin-top: 20px;
+ /*background-color: #393939; */
  /*display: flex;
  flex-direction: column;
  justify-content: flex-end; */
- bottom: 50px;
+ padding-bottom: 10px;
+ border-left: 15px solid #393939;
+ animation: fadeInFromBottom;
+ animation-duration: 1s;
+
 }
 
 .smallEvent {
@@ -37,59 +47,14 @@
 .panel-heading {
   height: 30px;
 }
-/*
-.smallEventType_0 .panel-heading {
-  background-color: green ;
-}
 
-.smallEventType_1 .panel-heading {
-  background-color: purple ;
-}
-
-.smallEventType_2 .panel-heading {
-  background-color: yellow ;
-}
-*/
-
-
-
-
-
-
-
-
-
-
-/*
-@media screen and (max-width: 480px) {
-
-
-    .bottom {
-      position: static;
-      bottom: -130px;
+@keyframes fadeInFromBottom {
+    from {
+      opacity: 0;
+      bottom: -100px;
+    }
+    to   {
+      opacity: 1;
+      bottom: 0;
     }
 }
-
-@media screen and (min-width: 480px) {
-    .bottom {
-      position: absolute;
-      bottom: 0px;
-    }
-}
-
-.home_main_panel {
-  height: 550px;
-  position: relative;
-}
-
-
-
-.smallEvent {
-  margin-top: 7px;
-}
-
-.smallEvent:hover {
-  background-color: #f4f4f4;
-  cursor: pointer;
-}
-*/

@@ -10,6 +10,8 @@
   -o-background-size: cover;
   background-size: cover; }
 
+
+
 /* div border*/
 .stl {
     border-radius: 25px;
@@ -75,17 +77,34 @@
   color: #7a6b9d;
 }
 
+
+/* -------------------- new about */
+
 .about-navigation {
   height: 40px;
   padding: 10px;
+  cursor: pointer;
+}
+
+.about-navigation:hover {
+  border-bottom: 2px solid black;
+}
+
+.about-main-panel {
+  animation-name: fadeIn;
+  animation-duration: 1s;
 }
 
 .small-social {
-  
 }
 
 .aboutProfileImg {
   width: 200px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0}
+    to   {opacity: 1}
 }
 
 
