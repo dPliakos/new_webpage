@@ -5,6 +5,7 @@ import {Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './../style/home.css';
+import './../style/main.css';
 import  imgData from './../data/testData.js';
 import  events from './../data/myevents.js';
 import store from './../../store.js';
@@ -18,13 +19,15 @@ class SmallEvent extends React.Component {
      const desc = `${event.date} @${event.location}`;
     return(
       <Col md={6} xs={12}>
-      <LinkContainer to={`/events/${event.title.toLowerCase()}`}>
-      <Panel className={"smallEvent " + this.props.type} header={event.title} >
+      <LinkContainer to={`/events/${event.title.toLowerCase()}`} className="">
+      <div className="smallEventsPanel light roundedCorners padding5">
+        <span> <h4> {event.title} </h4> </span>
+          
           <span> {desc} </span>
           <br/>
           <span> {event.subtitle} </span>
-        <br />
-      </Panel>
+        <br /> <br/> <br/>
+      </div>
       </LinkContainer>
       </Col>
     );
@@ -33,17 +36,6 @@ class SmallEvent extends React.Component {
 
 class SmallEventsPanel extends React.Component {
 
-  // constructor() {
-  //   super();
-  //   // this.state = {
-  //   //   events: events.events
-  //   // }
-
-  //   // const unsubscribe = store.subscribe(() =>
-  //   //   console.log(store.getState()
-  //   // ));
-  //   // console.log(store.getState());
-  // } 
   componentWillMount() {
      store.dispatch({
       type: EVENT_REQUEST_NEW,
@@ -59,7 +51,7 @@ class SmallEventsPanel extends React.Component {
   render() {
 
     const newEventsHeader = this.props.eventsState.requestSuccessNew && this.props.eventsState.recentEvents.length > 0
-            ? <h3> Upcoming Events </h3>
+            ? <div className="light padding2 roundedCorners "> <h3> Upcoming Events </h3> </div>
             : <div> </div>;
 
     let newEventsBody = this.props.eventsState.requestSuccessNew && this.props.eventsState.recentEvents.length > 0 
@@ -73,7 +65,10 @@ class SmallEventsPanel extends React.Component {
     return (
       <div>
       <Row>
-        {newEventsHeader}
+        <Col md={12} >
+        <br/> <br/> <br/>
+          {/*newEventsHeader*/}
+        </Col>
       </Row>
       <Row>
           { newEventsBody }

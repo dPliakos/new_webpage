@@ -69,6 +69,10 @@ class Members extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.className = "";
+  }
+
   componentWillMount() {
     this.parseMembers();
   }
@@ -96,7 +100,7 @@ class Members extends React.Component {
     const members = this.state.members;
 
     return (
-      <div>
+      <div className="about-main-panel" >
           {members.map((row, i)=>{
             return (<Row key={i}> {row} </Row>)
           })}
@@ -120,7 +124,7 @@ class AboutBullets extends React.Component {
   render() {
     return (
       <div>
-        <h3> {this.props.title} </h3>
+        <h3> {this.props.header} </h3>
         <ul>
           {this.props.body.map(
             (bullet, i)=>{return <li key={i}> {bullet} </li>}
@@ -132,6 +136,11 @@ class AboutBullets extends React.Component {
 }
 
 class AboutIEEE extends React.Component {
+
+  componentDidMount() {
+    this.className = "";
+  }
+
   render() {
 
     const abstract = aboutData.aboutData.abstract;
@@ -141,8 +150,8 @@ class AboutIEEE extends React.Component {
     const subscribe = aboutData.aboutData.subscribe;
 
     return (
-      <div>
-        <AboutParagraph header={activities.header} body={abstract.body} />
+      <div className="about-main-panel" >
+        <AboutParagraph header={abstract.header} body={abstract.body} />
         <AboutBullets header={activities.header} body={activities.body} />
         <AboutParagraph header={whyMemeber.header} body={whyMemeber.body} />
         <AboutBullets   header={benefits.header}   body={benefits.body} />
@@ -172,13 +181,16 @@ class Menu extends React.Component {
     return (
       <div>
         <Row>
-            <Col md={4}>
+            <Col md={3}>
+              <MenuItem title="branch" />
+            </Col>
+            <Col md={3}>
               <MenuItem title="IEEE" />
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <MenuItem title="Members" />
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <MenuItem title="Dev_Team" />
             </Col>
         </Row>
@@ -196,7 +208,7 @@ constructor() {
     this.state ={
       contributors: [],
       success: false,
-      error: false
+      error: false,
     }
   }
 
@@ -206,7 +218,7 @@ constructor() {
 
   getContributors(){
     if (this.state.success) {
-      console.log("returnings");
+      console.log("returning");
       return;
     }
     console.log("getting contributors");
@@ -257,10 +269,11 @@ constructor() {
         <Row>
         <Col md={10} mdOffset={1}>
           <Switch>
-            <Route exact path={"/about"} component={()=><Redirect to="/about/IEEE" />} />
-            <Route exact path={"/about/IEEE"} component={AboutIEEE} />
-            <Route exact path={"/about/Members"} component={()=><Members members={members} />} />
-            <Route exact path={"/about/Dev_Team"} component={()=><Members members={this.state.contributors}  />} />
+            <Route exact path={"/about"} component={()=><Redirect to="/about/branch" />} />
+            <Route exact path={"/about/branch"} component={()=><AboutIEEE className="about-main-panel"  />} />
+            <Route exact path={"/about/IEEE"} component={()=><AboutIEEE className="about-main-panel" />}/>
+            <Route exact path={"/about/Members"} component={()=><Members members={members} className="about-main-panel"  />} />
+            <Route exact path={"/about/Dev_Team"} component={()=><Members members={this.state.contributors} className="about-main-panel"  />} />
           </Switch>
         </Col>
       </Row>
