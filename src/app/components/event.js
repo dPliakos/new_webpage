@@ -5,6 +5,7 @@ import './../style/main.css';
 import events from "../data/myevents.js";
 import {Row, Col} from 'react-bootstrap';
 import store from './../../store.js';
+import ReactMarkdown from 'react-markdown';
 /*
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
@@ -68,7 +69,7 @@ export default class Event extends React.Component {
           </Row>
           <Row>
             <Col md={12} xs={10} mdOffset={0} xsOffset={1} className="eventDescription">
-              {match.description}
+              <ReactMarkdown source={match.description} />
             </Col>
           </Row>
         </Col>
