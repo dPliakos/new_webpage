@@ -10,8 +10,6 @@
   -o-background-size: cover;
   background-size: cover; }
 
-
-
 /* div border*/
 .stl {
     border-radius: 25px;
@@ -84,10 +82,11 @@
   height: 40px;
   padding: 10px;
   cursor: pointer;
+  border-left: 10px solid #f4f4f4;
 }
 
 .about-navigation:hover {
-  border-bottom: 2px solid black;
+   border-left: 10px solid #666464;
 }
 
 .about-main-panel {
