@@ -6,9 +6,6 @@ import './../style/pagination.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {Row, Col, Panel, Collapse} from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-// import Event from "./event.js";
-//import {Switch, Route, Link } from 'react-router-dom';
-//import store from './../../store.js';
 
 class PaginationTab extends React.Component {
 
@@ -48,8 +45,12 @@ export default class PaginatedList extends React.Component {
 			//while(end < nop-1) {end++;}
 		}
 
-		for (let i=start; i<=end; i++) {
-			tabs.push(<PaginationTab number={i+1} key={i} active={i===this.props.active} triger={()=>{this.props.activateIndex(i)}} />);
+		if (hideTabs) {
+			for (let i=start; i<=end; i++) 
+				tabs.push(<PaginationTab number={i+1} key={i} active={i===this.props.active} triger={()=>{this.props.activateIndex(i)}} />);
+		} else {
+			for (let i=start; i<end; i++) 
+				tabs.push(<PaginationTab number={i+1} key={i} active={i===this.props.active} triger={()=>{this.props.activateIndex(i)}} />);
 		}
 
 

@@ -54,6 +54,12 @@ const eventReducer = (state=initial, action) => {
       return newState;
       break;
     case eventActions.EVENT_LOAD_OLD: 
+      /*
+        This action loads a part of the events array.
+        The user selects the part by clicking on a pagination tab.
+        Given the page index at action.payload calculate the limits of the parts.
+      */
+      
       if (!action.payload) {
         action.payload = 0;
       } 
@@ -74,7 +80,7 @@ const eventReducer = (state=initial, action) => {
       return newState
       break;
     case eventActions.EVENT_SET_NUMBER_OF_PAGES:
-      const nop = Math.ceil(events.pastevents.length / 3);
+      const nop = Math.ceil(events.pastevents.length / state.eventsPerPage);
       var newState = {
         ...state,
         numberOfPages: nop

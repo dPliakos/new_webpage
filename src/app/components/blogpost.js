@@ -24,18 +24,6 @@ export default class BlogPost extends React.Component {
     return (
       <div>
       <Row>
-        {/*<Col md={1} className="sideBar">
-                  <Row>
-                    <Col className="sideButton">
-                      <Link to="/blog"> <FontAwesome name="times" /> </Link>
-                    </Col>
-                    <Col className="sideButton">
-                    </Col>
-                    <Col className="sideSpacer">
-        
-                    </Col>
-                  </Row>
-                </Col>*/}
         <Col md={12} mdOffset={0}>
           <Row>
             <Col md={1}>

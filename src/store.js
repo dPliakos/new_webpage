@@ -6,12 +6,13 @@ import {createStore , combineReducers, applyMiddleware} from "redux";
 
 // import reducers
 import eventReducer from "./app/reducers/eventReducer.js";
-
+import blogReducer  from "./app/reducers/blogReducer.js";
 
 
 // new 
 const reducers = combineReducers({
-  eventsState: eventReducer
+  eventsState: eventReducer,
+  blog: blogReducer
 });
 
 const store = createStore(reducers);
