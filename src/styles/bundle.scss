@@ -1,1 +1,8 @@
-$a:  2px;
+// import basic components
+@import './_colors.scss';
+@import './_fonts.scss';
+@import './_variables.scss';
+
+// import components
+@import './event-teaser/_event-teaser.scss';
+@import './icon-label/_icon-label.scss';

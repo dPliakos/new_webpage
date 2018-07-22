@@ -1,0 +1,12 @@
+.icon-label  {
+
+  &__icon  {
+    display: inline-block;
+    font-size: 25px;
+    padding-right: 10px;
+  }
+
+  &__label {
+    display: inline-block;
+  }
+}
