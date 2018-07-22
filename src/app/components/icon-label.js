@@ -8,7 +8,7 @@ class IconLabel extends React.Component {
     const icon = this.props.icon || '';
     const label = this.props.label;
 
-    const iconElement = <div className="icon-label__icon"> {icon} </div>;
+    const iconElement = <span className={`icon-label__icon fas fa-${icon}`}></span>;
     const labelElement = <div className="icon-label__label"> {label} </div>;
 
     let body;
