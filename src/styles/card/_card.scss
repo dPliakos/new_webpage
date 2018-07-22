@@ -1,0 +1,43 @@
+.card {
+  width: 500px;
+  min-height: 110px;
+  background-color: $color-soft-white;
+  position: relative;
+  padding-left: 30px;
+  padding-right:20px;
+  transition: .2s ease-out;
+  border-radius: 3px;
+
+  &::before {
+    content: '';
+    height: 100%;
+    width: 20px;
+    background-color: $color-black-light;
+    display: inline-block;
+    position: absolute;
+    transition: .2s ease-out;
+    left: 0;
+  }
+
+  &__header  {
+    padding-top: 10px;
+    font-size: 20px;
+  }
+
+  &__body {
+    margin-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  &__body-item {
+    margin-top: 5px;
+  }
+
+  &:hover {
+    padding-left: 40px;
+    padding-right: 10px;
+    &::before {
+      width: 30px;
+    }
+  }
+}

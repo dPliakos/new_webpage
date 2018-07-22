@@ -1,5 +1,6 @@
 import React from 'react';
 import ExpandibleCard from './components/event-teaser';
+import Card from './components/card';
 
 class App extends React.Component {
   render() {
@@ -14,9 +15,17 @@ class App extends React.Component {
       link: 'http://google.com'
     }
 
+    const eventPreview = `07/12/2018 This is a title`;
+    const eventDesc = `Lorem ipsum donor sit amet Lorem ipsum donor sit amet Lorem ipsum donor sit amet`
+    const evtime = '23:03';
+    const location = 'location';
+
+    const eventBody = [evtime, location, eventDesc ];
+
     return (
       <div>
         <ExpandibleCard event={event} />
+        <Card title={eventPreview} body={eventBody}/>
       </div>
     );
   }
