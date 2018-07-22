@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import {Row, Col, Panel, Button} from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
+import  imgData from './../data/testData.js';
+import  events from './../data/myevents.js';
+import store from './../store.js';
+import {EVENT_LOAD_NEW, EVENT_REQUEST_NEW, EVENT_REQUEST_OLD, } from './../actions/eventActions.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import './../style/home.css';
 import './../style/main.css';
-import  imgData from './../data/testData.js';
-import  events from './../data/myevents.js';
-import store from './../../store.js';
-import {EVENT_LOAD_NEW, EVENT_REQUEST_NEW, EVENT_REQUEST_OLD, } from './../actions/eventActions.js';
 // import messages from './../data/testData.js';
+
 
 
 class SmallEvent extends React.Component {

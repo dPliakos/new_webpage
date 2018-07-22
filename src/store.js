@@ -5,14 +5,16 @@ import {createStore , combineReducers, applyMiddleware} from "redux";
 // import promise from "redux-promise-middleware";
 
 // import reducers
-import eventReducer from "./app/reducers/eventReducer.js";
-import blogReducer  from "./app/reducers/blogReducer.js";
+import eventReducer from "./reducers/eventReducer.js";
+import blogReducer  from "./reducers/blogReducer.js";
+import userReducer  from "./reducers/userReducer";
 
 
 // new 
 const reducers = combineReducers({
   eventsState: eventReducer,
-  blog: blogReducer
+  blog: blogReducer,
+  user: userReducer
 });
 
 const store = createStore(reducers);

@@ -1,26 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Navbar, Nav, NavItem, Grid, Row, Col} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import './app/style/main.css';
-import Home from './app/components/home.js';
-import About from './app/components/about.js';
-import Events from './app/components/events.js';
-import Blog from './app/components/blog.js';
-import Contact from './app/components/contact.js';
-import ERROR from './not_found.js';
-import Footer from './app/components/footer.js';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {Navbar, NavDropdown, Nav, NavItem, MenuItem, Grid, Row, Col} from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
+import Home from './components/home.js';
+import About from './components/about.js';
+import Events from './components/events.js';
+import Blog from './components/blog.js';
+import Contact from './components/contact.js';
+import User from './components/userProfile.js';
+import ERROR from './not_found.js';
+import Footer from './components/footer.js';
 import {Provider} from "react-redux";
+import UserMenu from "./components/UserMenu.js";
 import store from "./store.js";
-import {EVENT_LOAD_NEW} from './app/actions/eventActions.js';
-
+import {EVENT_LOAD_NEW} from './actions/eventActions.js';
+import * as userActions from './actions/userActions.js';
+import 'bootstrap/dist/css/bootstrap.css';
+import './style/main.css';
 
 
 class NavigationBar extends React.Component {
 
   render() {
+
     return (
       <Navbar className ="navigationBar" inverse collapseOnSelect>
         <Navbar.Header>
@@ -30,7 +34,7 @@ class NavigationBar extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
           <Navbar.Collapse>
-            <Nav pullRight className="rightPadding">
+            <Nav>
               <LinkContainer exact to="/">
                 <NavItem > Home  </NavItem>
               </LinkContainer>
@@ -47,6 +51,7 @@ class NavigationBar extends React.Component {
                 <NavItem > Contact </NavItem>
               </LinkContainer>
             </Nav>
+              <UserMenu />
           </Navbar.Collapse>
       </Navbar>
     );
@@ -65,21 +70,10 @@ class Page extends React.Component {
 
   componentWillMount() {
     let newEvents;
-
-    // fetch('http://localhost:3001/events').then((response)=>{
-    //   return response.json();
-    // }, (err)=>{
-    //   this.setState({error: true});
-    // }).then((response)=>{
-    //   newEvents = response;
-    // }, (err)=>{
-    //   console.error(err);
-    // }).then((response=>{
-    //   store.dispatch({
-    //     type: EVENT_LOAD_NEW,
-    //     payload: newEvents
-    //   })
-    // }))
+    // store.dispatch({
+    //   type: userActions.LOGIN,
+    //   payload: {}
+    // })
   }
 
   changeBackground(type, source) {
@@ -95,24 +89,40 @@ class Page extends React.Component {
   }
 
   render() {
+
+    const mapStateToProps = function (store) {
+      return {
+        user: store.user
+      };
+    }
+
     return (
       <Provider store={store}>
       <Router className="fullScreen">
           <div>
-            <NavigationBar onClick={(index)=>{this.onPageChange(index)}}/>
+            <NavigationBar onClick={(index)=>{this.onPageChange(index)}} />
               <Grid>
                 <Row>
                 <Col>
                 <Switch>
                   <Route exact path="/" component={
-                    () => <Home changeBackground={this.changeBackground} />
+                    connect(mapStateToProps)(
+                      () => <Home changeBackground={this.changeBackground} />
+                    )
                   }/>
                   <Route path="/about" component={
                     () => <About changeBackground={this.changeBackground} />
                   }/>
-                  <Route path="/events" err={this.state.error} component={Events}/>
-                  <Route path="/blog" component={Blog}/>
-                  <Route path="/contact" component={Contact}/>
+                  <Route path="/events" err={this.state.error} component={
+                    connect(mapStateToProps)(Events)
+                  }/>
+                  <Route path="/blog" component={
+                    connect(mapStateToProps)(Blog)
+                  }/>
+                  <Route path="/contact" component={
+                    connect(mapStateToProps)(Contact)
+                  }/> 
+                  <Route path="/users/:username" component={User} />
                   <Route component={ERROR} />
                 </Switch>
               </Col>

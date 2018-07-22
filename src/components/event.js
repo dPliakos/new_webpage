@@ -4,7 +4,7 @@ import './../style/events.css';
 import './../style/main.css';
 import events from "../data/myevents.js";
 import {Row, Col} from 'react-bootstrap';
-import store from './../../store.js';
+import store from './../store.js';
 import ReactMarkdown from 'react-markdown';
 /*
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';

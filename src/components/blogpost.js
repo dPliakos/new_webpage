@@ -3,11 +3,11 @@ import {Row, Col} from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import blogposts from './../data/blog_data.js';
 import FontAwesome from 'react-fontawesome';
+import ReactMarkdown from 'react-markdown';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './../style/main.css';
 import './../style/blogpost.css';
-import ReactMarkdown from 'react-markdown';
 
 
 export default class BlogPost extends React.Component {

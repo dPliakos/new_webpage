@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.css';
-import './../style/events.css';
-import './../style/main.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {Row, Col, Panel, Collapse, Pagination} from 'react-bootstrap';
 import {Switch, Route, Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
-import store from './../../store.js';
+import store from './../store.js';
 import Event from "./event.js";
 import PaginatedList from './paginatedList.js';
 import {EVENT_LOAD_NEW, EVENT_LOAD_OLD, EVENT_REQUEST_NEW, 
   EVENT_REQUEST_OLD, EVENT_SET_NUMBER_OF_PAGES} from './../actions/eventActions.js';
 import {NewEvent} from './event_create.js';
+import 'bootstrap/dist/css/bootstrap.css';
+import './../style/events.css';
+import './../style/main.css';
 
 
 class LabeledIcon extends React.Component {

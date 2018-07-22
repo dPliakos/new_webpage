@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import blogpost from './blogpost.js';
 import blogposts from './../data/blog_data.js'
 import PaginatedList from './paginatedList.js'
-import store from './../../store.js';
+import store from './../store.js';
 import * as actions from './../actions/blogActions.js'
 import 'bootstrap/dist/css/bootstrap.css';
 import './../style/main.css';
