@@ -11,29 +11,30 @@ class ExpandibleCard extends React.Component {
   }
 
   render() {
+    const event = this.props.event;
 
-    const title = this.props.title || '';
-    const subtitle = this.props.subtitle || '';
-    const day = this.props.date.getDate();
-    const month = this.props.date.getMonth() + 1;
-    const hours = this.props.date.getHours();
-    const mins = this.props.date.getMinutes();
-    const description = this.props.description;
+    const title = event.title || '';
+    const subtitle = event.subtitle || '';
+    const day = event.date.getDate();
+    const month = event.date.getMonth() + 1;
+    const hours = event.date.getHours();
+    const mins = event.date.getMinutes();
+    const description = event.description;
 
     const date_upper = `${day}/${month}`;
     const date_lower = `${hours}:${mins}`;
 
-    const location_label = this.props.location || 'no location found';
+    const location_label = event.location || 'no location found';
     const location = <IconLabel label={location_label} icon='location' />
 
     let organizer = <div></div>;
-    if (this.props.organizer) {
-      organizer = <IconLabel label={this.props.organizer} icon='organizer' />
+    if (event.organizer) {
+      organizer = <IconLabel label={event.organizer} icon='organizer' />
     }
 
     let link = <div></div>;
-    if (this.props.link) {
-      link = <IconLabel label='Learn more' icon='link' url='http://google.com'/>
+    if (event.link) {
+      link = <IconLabel label='Learn more' icon='link' url={event.link}/>
     }
 
     const extraClasses = this.state.open ? 'event-teaser--open' : '';
@@ -57,6 +58,7 @@ class ExpandibleCard extends React.Component {
               {subtitle}
             </div>
           </div>
+          <div className="event-teaser__button"></div>
         </div>
         <div className="event-teaser__body">
           <div className="event-teaser__basic-info">
